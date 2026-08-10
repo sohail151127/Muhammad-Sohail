@@ -1,0 +1,9 @@
+{
+  "name": "Muhammad Sohail — Academic Research Portfolio",
+  "short_name": "Muhammad Sohail",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4f2ec",
+  "theme_color": "#14243b",
+  "icons": [{"src": "assets/images/favicon.svg", "sizes": "any", "type": "image/svg+xml"}]
+}
