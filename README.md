@@ -38,6 +38,12 @@ Use a short professional domain if possible, such as `muhammadsohailphysics.com`
 - Interactions: edit `assets/js/main.js`.
 - Research images: place files in `assets/images/research/` and reference them with relative paths.
 
+## Update the live GitHub Pages site
+
+Open the GitHub repository and choose **Add file → Upload files**. Upload the contents of this folder again, including the `assets` folder, and confirm replacement of the existing files. Commit directly to `main`; GitHub Pages will publish the revision automatically.
+
+The header navigation is shared across every page. Homepage menu items scroll to sections, while the research case study and CV remain detailed secondary pages. Degree wording preserves the official MPhil title and explains it internationally as a research master's.
+
 ## Privacy rules
 
 Do not add CNIC, passport, birth date, registration/roll numbers, home address, signatures, private referee details or unredacted transcripts. Confirm any new public claims against source evidence before publishing.

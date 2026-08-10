@@ -7,6 +7,41 @@
   setHeader();
   window.addEventListener('scroll', setHeader, { passive: true });
 
+  const sectionLinks = [...document.querySelectorAll('[data-section-link]')];
+  const trackedSections = sectionLinks
+    .map((link) => ({ link, section: document.getElementById(link.dataset.sectionLink) }))
+    .filter((item) => item.section);
+
+  if (trackedSections.length) {
+    let scrollFrame;
+    const setCurrentSection = () => {
+      const marker = window.scrollY + (header?.offsetHeight || 78) + Math.min(180, window.innerHeight * .28);
+      let current = trackedSections[0];
+      trackedSections.forEach((item) => {
+        if (item.section.offsetTop <= marker) current = item;
+      });
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8) {
+        current = trackedSections[trackedSections.length - 1];
+      }
+      sectionLinks.forEach((link) => {
+        const active = link === current.link;
+        link.classList.toggle('is-active', active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+      scrollFrame = null;
+    };
+    const requestSectionUpdate = () => {
+      if (!scrollFrame) scrollFrame = window.requestAnimationFrame(setCurrentSection);
+    };
+    setCurrentSection();
+    window.addEventListener('scroll', requestSectionUpdate, { passive: true });
+    window.addEventListener('resize', requestSectionUpdate);
+    sectionLinks.forEach((link) => link.addEventListener('click', () => {
+      sectionLinks.forEach((item) => item.classList.toggle('is-active', item === link));
+    }));
+  }
+
   if (menuToggle && nav) {
     const closeMenu = () => {
       menuToggle.setAttribute('aria-expanded', 'false');
