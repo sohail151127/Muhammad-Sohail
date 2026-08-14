@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A guided browser-based LIBS calibration curve, unknown-concentration, LOD and LOQ analyzer by Muhammad Sohail.">
+  <meta name="theme-color" content="#14243b">
+  <title>LIBS Calibration Curve &amp; Detection Limit Analyzer — Muhammad Sohail</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/calibration-analyzer.css">
+</head>
+<body class="calibration-page">
+  <a class="skip-link" href="#calibration-analyzer">Skip to analyzer</a>
+  <header class="site-header" data-header><div class="shell header-inner">
+    <a class="brand" href="index.html" aria-label="Muhammad Sohail home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><strong>Muhammad Sohail</strong><small>Physics · Spectroscopy</small></span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle><span class="sr-only">Open navigation</span><span></span><span></span><span></span></button>
+    <nav class="nav" id="primary-navigation" aria-label="Primary navigation" data-nav><a href="index.html#home">Home</a><a href="index.html#research">Research</a><a href="libs-spectrum-analyzer.html">Spectrum</a><a href="spectral-peak-fitter.html">Peak</a><a class="is-active" href="libs-calibration-analyzer.html" aria-current="page">Cal</a><a href="laser-experiment-calculator.html">Laser</a><a href="boltzmann-plasma-analyzer.html">Temp</a><a href="stark-electron-density-analyzer.html">Density</a><a href="lte-mcwhirter-checker.html">LTE</a><a href="libs-plasma-report-builder.html">Report</a><a href="cv.html">CV</a><a class="nav-cta" href="index.html#contact">Contact</a></nav>
+  </div></header>
+
+  <main id="calibration-analyzer">
+    <section class="calibration-hero"><div class="shell hero-grid">
+      <div><p class="eyebrow"><span></span> Scientific computing project · Quantitative LIBS</p><h1>Calibration Curve &amp; <em>Detection Limits.</em></h1><p class="hero-intro">Connect measured LIBS signal to known concentration, estimate an unknown sample, and calculate transparent LOD and LOQ values—with every step explained.</p><div class="hero-badges"><span>Linear regression</span><span>Unknown prediction</span><span>LOD &amp; LOQ</span><span>Residual checks</span></div></div>
+      <aside class="method-note"><span>The central idea</span><p>Standards with known concentrations teach the model how signal changes. The fitted line can then convert an unknown signal into an estimated concentration.</p></aside>
+    </div></section>
+
+    <section class="workflow-strip" aria-label="LIBS analysis workflow"><div class="shell"><a href="libs-spectrum-analyzer.html">Spectrum</a><i>→</i><a href="spectral-peak-fitter.html">Peak area</a><i>→</i><strong>Calibration</strong><i>→</i><span>Concentration</span><i>→</i><a href="libs-plasma-report-builder.html">Report</a></div></section>
+
+    <section class="workspace section-pad-small"><div class="shell">
+      <div class="workspace-heading"><div><p class="eyebrow"><span></span> Guided workspace</p><h2>From standards to an unknown.</h2></div><p id="calibration-status" role="status" aria-live="polite">Synthetic learning data are loaded. Replace them with measurements from your own validated experiment.</p></div>
+      <div class="workspace-grid">
+        <aside class="control-panel" aria-label="Calibration inputs">
+          <section class="control-section"><span class="control-number">01</span><h3>Describe the analysis</h3><label class="field-label" for="analyte-label">Analyte or spectral line</label><input id="analyte-label" type="text" value="Synthetic Cu I example"><div class="input-pair"><label>Concentration unit<input id="concentration-unit" type="text" value="mg/L"></label><label>Signal unit<input id="signal-unit" type="text" value="a.u."></label></div></section>
+          <section class="control-section"><span class="control-number">02</span><h3>Enter calibration standards</h3><p>One known concentration and measured signal per row. Commas, tabs or spaces are accepted.</p><textarea id="standard-data" rows="7" spellcheck="false" aria-label="Calibration standard concentration and signal data">Concentration, Signal
+0, 51
+10, 169
+20, 284
+30, 400
+40, 513
+50, 629</textarea><label class="file-control" for="calibration-file"><strong>Load standards from CSV</strong><small>Two numeric columns · processed locally</small></label><input id="calibration-file" class="file-input" type="file" accept=".csv,.txt,text/csv,text/plain"></section>
+          <section class="control-section"><span class="control-number">03</span><h3>Enter blank signals</h3><p>Blank replicates contain no added analyte and estimate background-response variation.</p><textarea id="blank-data" rows="3" spellcheck="false" aria-label="Blank signal replicates">49, 52, 50, 53, 51</textarea><label class="field-label" for="sigma-method">Standard deviation used for limits</label><select id="sigma-method"><option value="blank">Blank-response standard deviation</option><option value="residual">Calibration residual standard deviation</option></select></section>
+          <section class="control-section"><span class="control-number">04</span><h3>Enter the unknown signal</h3><p>Replicate signals improve the estimate of measurement repeatability.</p><textarea id="unknown-data" rows="3" spellcheck="false" aria-label="Unknown sample signal replicates">339, 344, 341</textarea></section>
+          <button id="restore-calibration" class="secondary-button" type="button">Restore learning example</button><button id="download-calibration" class="download-button" type="button">Download analysis CSV <span aria-hidden="true">↓</span></button>
+        </aside>
+
+        <div class="results-panel">
+          <div class="metric-grid" aria-label="Calibration summary"><article><span>Slope</span><strong id="metric-slope">—</strong></article><article><span>Intercept</span><strong id="metric-intercept">—</strong></article><article><span>R²</span><strong id="metric-r2">—</strong></article><article><span>Residual SD</span><strong id="metric-residual-sd">—</strong></article></div>
+          <section class="result-card" aria-live="polite"><div><span>Plain-language result</span><h2 id="result-heading">The learning example is ready.</h2><p id="result-summary">The regression and unknown-sample estimate will be explained here.</p></div><div id="quality-badge" class="quality-badge">CALCULATING</div></section>
+
+          <section class="unknown-card" aria-labelledby="unknown-title"><div><span>Unknown-sample estimate</span><h2 id="unknown-title">Estimated concentration</h2><p>The average unknown signal is placed into the fitted equation and solved for concentration.</p></div><div class="unknown-value"><strong id="unknown-concentration">—</strong><span id="unknown-interval">—</span><small id="unknown-range-note">Waiting for valid inputs.</small></div></section>
+
+          <section class="limit-grid" aria-label="Detection and quantitation limits"><article><span>Estimated detection limit · LOD</span><strong id="lod-value">—</strong><p><b>Meaning:</b> an approximate concentration where signal may become distinguishable from background.</p></article><article><span>Estimated quantitation limit · LOQ</span><strong id="loq-value">—</strong><p><b>Meaning:</b> an approximate lower concentration for quantitative work that still requires experimental validation.</p></article><article><span>σ used in both equations</span><strong id="sigma-value">—</strong><p id="sigma-description">Selected response standard deviation.</p></article></section>
+
+          <section class="chart-card" aria-labelledby="curve-title"><div class="chart-heading"><div><span>Interactive figure 01</span><h2 id="curve-title">Signal against known concentration</h2></div><div class="legend"><span><i class="legend-point"></i>Standards</span><span><i class="legend-line"></i>Fitted line</span><span><i class="legend-band"></i>95% mean-fit band</span></div></div><div class="chart-wrap"><svg id="calibration-chart" viewBox="0 0 1000 500" role="img" aria-labelledby="curve-title curve-desc"><desc id="curve-desc">Calibration standards, fitted regression line, confidence band and unknown sample prediction.</desc></svg></div><p class="chart-caption"><strong>How to read this:</strong> points should follow the fitted line without a systematic curve. The orange diamond shows the unknown sample estimate.</p></section>
+
+          <section class="chart-card residual-card" aria-labelledby="residual-title"><div class="chart-heading"><div><span>Diagnostic figure 02</span><h2 id="residual-title">Residuals: measured signal minus fitted signal</h2></div></div><div class="residual-wrap"><svg id="calibration-residual-chart" viewBox="0 0 1000 260" role="img" aria-labelledby="residual-title residual-desc"><desc id="residual-desc">Residuals for each calibration standard.</desc></svg></div><p class="chart-caption">A random pattern around zero supports the straight-line assumption. A curve, widening spread or extreme point needs investigation.</p></section>
+
+          <section class="data-card" aria-labelledby="standard-table-title"><div><span>Standard-by-standard check</span><h2 id="standard-table-title">What the fitted line predicted</h2><p>Residual equals measured signal minus fitted signal. A review flag is a prompt to investigate, never permission to delete a point automatically.</p></div><div class="table-scroll"><table><thead><tr><th>Concentration</th><th>Measured</th><th>Fitted</th><th>Residual</th><th>Studentized residual</th><th>Check</th></tr></thead><tbody id="standard-table"></tbody></table></div></section>
+
+          <section class="equation-card"><div><span>Visible mathematics</span><h2>Exactly what was calculated.</h2></div><div class="equations"><p><b>Calibration line:</b> <span id="equation-line">Signal = intercept + slope × concentration</span></p><p><b>Unknown:</b> <span id="equation-unknown">Concentration = (unknown signal − intercept) ÷ slope</span></p><p><b>Detection limit:</b> LOD = 3.3σ ÷ |slope|</p><p><b>Quantitation limit:</b> LOQ = 10σ ÷ |slope|</p></div></section>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="learning-section section-pad-small"><div class="shell learning-grid"><div><p class="eyebrow eyebrow-light"><span></span> Beginner guide</p><h2>Four terms that prevent confusion.</h2><p>These results describe the entered calibration dataset. They do not automatically validate an analytical method.</p></div><div class="definition-list"><article><span>01</span><div><h3>Calibration standard</h3><p>A sample with a known analyte concentration, prepared and measured to connect concentration with instrument response.</p></div></article><article><span>02</span><div><h3>Residual</h3><p>The difference between a measured signal and the signal predicted by the line. Residuals reveal patterns hidden by R².</p></div></article><article><span>03</span><div><h3>LOD and LOQ</h3><p>LOD is an estimated detection limit; LOQ is an estimated quantitation limit. Both require experimental confirmation near the lower range.</p></div></article><article><span>04</span><div><h3>R² is not validation</h3><p>A value near one describes linear agreement in this dataset. It does not prove accuracy, selectivity, precision, matrix matching or absence of self-absorption.</p></div></article></div></div></section>
+
+    <section class="limitations section-pad-small"><div class="shell limitations-grid"><div><p class="eyebrow"><span></span> Scientific boundaries</p><h2>Before reporting concentration.</h2></div><div><ul><li>Use matrix-matched standards and the same acquisition and preprocessing conditions as unknown samples.</li><li>Confirm linearity across the working range and investigate self-absorption, spectral interference and changing plasma conditions.</li><li>Do not report an extrapolated unknown as reliable without extending and validating the calibration range.</li><li>The displayed 95% interval is a regression-based estimate; it excludes preparation, reference-standard, matrix and instrument uncertainties.</li><li>Validate the proposed LOQ using accuracy and precision measurements near that concentration.</li></ul><p class="source-note"><strong>Scientific reading:</strong> <a href="https://database.ich.org/sites/default/files/ICH_Q2%28R2%29_Guideline_2023_1130.pdf" target="_blank" rel="noopener noreferrer">ICH Q2(R2) analytical validation</a> · <a href="https://www.itl.nist.gov/div898/software/dataplot/refman1/auxillar/calibrat.htm" target="_blank" rel="noopener noreferrer">NIST calibration guidance</a> · <a href="https://www.epa.gov/cwa-methods/method-detection-limit-frequent-questions" target="_blank" rel="noopener noreferrer">US EPA method detection-limit guidance</a></p></div></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="shell footer-grid"><div><strong>Muhammad Sohail</strong><span>Research Master's (MPhil) in Physics · Pakistan</span></div><p>Laser spectroscopy · LIBS · Experimental physics</p><span>© <span data-year></span> Muhammad Sohail</span></div></footer>
+  <script src="assets/js/main.js"></script><script src="assets/js/calibration-analyzer.js"></script>
+</body>
+</html>
