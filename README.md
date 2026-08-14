@@ -10,6 +10,7 @@ A dependency-free static academic website designed for funded MS, MS-to-PhD, PhD
 - `laser-experiment-calculator.html` — guided Gaussian-beam and pulsed-laser calculator
 - `boltzmann-plasma-analyzer.html` — guided Boltzmann plot and plasma excitation-temperature analyzer
 - `stark-electron-density-analyzer.html` — guided Stark-broadening and electron-density analyzer
+- `lte-mcwhirter-checker.html` — guided LTE plausibility and McWhirter criterion checker
 - `cv.html` — privacy-safe academic CV with Print / Save as PDF
 - `404.html` — custom fallback page
 
@@ -53,6 +54,8 @@ The repository root is deployed through GitHub Pages; no build command is requir
 - Boltzmann analyzer styling: edit `assets/css/boltzmann-analyzer.css`.
 - Stark analyzer logic: edit `assets/js/stark-analyzer.js`.
 - Stark analyzer styling: edit `assets/css/stark-analyzer.css`.
+- LTE checker logic: edit `assets/js/lte-checker.js`.
+- LTE checker styling: edit `assets/css/lte-checker.css`.
 - Academic record: edit `cv.html`.
 - Shared colors, spacing and typography: edit `assets/css/styles.css`.
 - Shared interactions: edit `assets/js/main.js`.

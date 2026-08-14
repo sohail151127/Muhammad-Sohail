@@ -87,6 +87,7 @@
     output.reading.className = `density-reading${cautions.length ? ' is-caution' : ''}`;
 
     latest = { ...data, correctedWidth:correction.width, correctedUncertainty:correction.uncertainty, correctionLabel:correction.label, referenceFWHM, density, densityUncertainty, instrumentShare, temperatureDifference, ratio };
+    document.getElementById('density-lte-link').href = `lte-mcwhirter-checker.html?density=${encodeURIComponent(density.toPrecision(10))}`;
     drawProfile(latest);
   }
 

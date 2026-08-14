@@ -97,6 +97,7 @@
     const energySpan = Math.max(...energies) - Math.min(...energies);
     points.forEach((point, index) => { point.fitted = fit.fitted[index]; point.residual = point.y - fit.fitted[index]; });
     latestAnalysis = { points, fit, temperatureK, temperatureEV, uncertaintyK, energySpan, valid: true };
+    document.getElementById('temperature-lte-link').href = `lte-mcwhirter-checker.html?temperature=${encodeURIComponent(temperatureK.toFixed(6))}`;
 
     resultNodes.temperature.textContent = `${temperatureK.toLocaleString('en-US', { maximumSignificantDigits: 4 })} K`;
     resultNodes.uncertainty.textContent = Number.isFinite(uncertaintyK) ? `Regression-only 1σ estimate: ± ${uncertaintyK.toLocaleString('en-US', { maximumSignificantDigits: 3 })} K` : 'Uncertainty requires more than two lines.';
