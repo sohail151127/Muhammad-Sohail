@@ -187,7 +187,6 @@ em { font-family: var(--serif); font-weight: 400; }
 .project-card h3 { margin: 52px 0 16px; font-family: var(--serif); font-size: 1.8rem; font-weight: 400; }
 .project-card p { font-size: .86rem; }
 .project-card-featured { border-color: rgba(49,95,138,.35); background: linear-gradient(155deg,#fff 55%,#f1f6f7); }
-.project-card-wide { grid-column:1 / -1; min-height:325px; }
 .project-actions { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: auto; padding-top: 28px; border-top: 1px solid var(--line); }
 .project-link { display: inline-flex; align-items: center; gap: 7px; color: var(--blue); font-size: .76rem; font-weight: 750; text-decoration: none; }
 .project-link span { transition: transform .2s ease; }.project-link:hover span { transform: translate(2px,-2px); }
@@ -273,7 +272,7 @@ figcaption span { flex: 0 0 auto; color: var(--blue); font-weight: 750; text-tra
   .proof-grid { grid-template-columns: 1fr 1fr; }.proof-grid > div:nth-child(3) { border-left: 1px solid var(--line); }.proof-grid > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   .split-heading { grid-template-columns: 1fr; gap: 10px; }.split-heading > p { max-width: 600px; }
   .feature-card { grid-template-columns: 1fr; }.feature-visual { min-height: auto; }
-  .experience-layout, .journey-grid, .evidence-grid, .contact-grid { grid-template-columns: 1fr; gap: 60px; }.journey-intro { position: static; }.interest-grid { grid-template-columns: 1fr 1fr; }.project-grid { grid-template-columns: 1fr; }.project-card,.project-card-wide { min-height: 290px; }.project-card h3 { margin-top: 38px; }
+  .experience-layout, .journey-grid, .evidence-grid, .contact-grid { grid-template-columns: 1fr; gap: 60px; }.journey-intro { position: static; }.interest-grid { grid-template-columns: 1fr 1fr; }.project-grid { grid-template-columns: 1fr; }.project-card { min-height: 290px; }.project-card h3 { margin-top: 38px; }
   .toolkit-grid { grid-template-columns: 1fr 1fr; }
   .case-hero-grid { grid-template-columns: 1fr; gap: 45px; }.case-layout { grid-template-columns: 1fr; }.case-toc { position: relative; top: auto; z-index: 2; display: flex; overflow-x: auto; padding: 11px 0; border-left: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }.case-toc span { display:none; }.case-toc a { flex: 0 0 auto; padding-right: 16px; }.case-toc a:hover { transform:none; }
   .cv-document { padding: 55px 45px; }.cv-header { grid-template-columns: 1fr; gap: 10px; }.cv-header address { padding-top: 0; }

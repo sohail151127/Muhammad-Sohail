@@ -7,6 +7,7 @@ A dependency-free static academic website designed for funded MS, MS-to-PhD, PhD
 - `index.html` — academic homepage
 - `research.html` — detailed LIBS/AAS/CF-LIBS/PCA case study
 - `libs-spectrum-analyzer.html` — interactive browser-based spectrum analysis project
+- `spectral-peak-fitter.html` — Gaussian, Lorentzian and pseudo-Voigt peak-fitting and FWHM analyzer
 - `laser-experiment-calculator.html` — guided Gaussian-beam and pulsed-laser calculator
 - `boltzmann-plasma-analyzer.html` — guided Boltzmann plot and plasma excitation-temperature analyzer
 - `stark-electron-density-analyzer.html` — guided Stark-broadening and electron-density analyzer
@@ -49,6 +50,9 @@ The repository root is deployed through GitHub Pages; no build command is requir
 - Spectrum analyzer interface: edit `libs-spectrum-analyzer.html`.
 - Spectrum processing logic: edit `assets/js/spectrum-analyzer.js`.
 - Analyzer styling: edit `assets/css/spectrum-analyzer.css`.
+- Peak-fitting interface: edit `spectral-peak-fitter.html`.
+- Peak-fitting logic: edit `assets/js/peak-fitter.js`.
+- Peak-fitting styling: edit `assets/css/peak-fitter.css`.
 - Laser calculator logic: edit `assets/js/laser-calculator.js`.
 - Laser calculator styling: edit `assets/css/laser-calculator.css`.
 - Boltzmann analyzer logic: edit `assets/js/boltzmann-analyzer.js`.

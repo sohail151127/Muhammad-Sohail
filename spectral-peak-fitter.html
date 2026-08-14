@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A guided browser-based spectral peak fitter by Muhammad Sohail for Gaussian, Lorentzian and pseudo-Voigt line-profile comparison, FWHM estimation and residual review.">
+  <meta name="theme-color" content="#14243b">
+  <title>Spectral Peak Fitting &amp; FWHM Analyzer — Muhammad Sohail</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/peak-fitter.css">
+</head>
+<body class="peak-page">
+  <a class="skip-link" href="#peak-analyzer">Skip to analyzer</a>
+  <header class="site-header" data-header>
+    <div class="shell header-inner">
+      <a class="brand" href="index.html" aria-label="Muhammad Sohail home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><strong>Muhammad Sohail</strong><small>Physics · Spectroscopy</small></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle><span class="sr-only">Open navigation</span><span></span><span></span><span></span></button>
+      <nav class="nav" id="primary-navigation" aria-label="Primary navigation" data-nav>
+        <a href="index.html#home">Home</a><a href="index.html#research">Research</a><a href="libs-spectrum-analyzer.html">Spectrum</a><a class="is-active" href="spectral-peak-fitter.html" aria-current="page">Peak</a><a href="laser-experiment-calculator.html">Laser</a><a href="boltzmann-plasma-analyzer.html">Temp</a><a href="stark-electron-density-analyzer.html">Density</a><a href="lte-mcwhirter-checker.html">LTE</a><a href="libs-plasma-report-builder.html">Report</a><a href="cv.html">CV</a><a class="nav-cta" href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="peak-analyzer">
+    <section class="peak-hero">
+      <div class="shell peak-hero-grid">
+        <div>
+          <p class="eyebrow"><span></span> Scientific computing project · Line-shape analysis</p>
+          <h1>Spectral Peak <em>Fitting.</em></h1>
+          <p class="peak-intro">Turn one isolated emission peak into an explained centre wavelength, fitted FWHM and model-quality check—without installing software.</p>
+          <div class="peak-badges" aria-label="Project features"><span>Local CSV</span><span>Three profiles</span><span>Residuals</span><span>FWHM uncertainty</span></div>
+        </div>
+        <aside class="method-note"><span>What this tool answers</span><p>Which simple line shape best describes this selected peak, where is its fitted centre, and how wide is it at half of its fitted maximum?</p></aside>
+      </div>
+    </section>
+
+    <section class="workflow-strip" aria-label="LIBS analysis workflow"><div class="shell"><span>Raw spectrum</span><i>→</i><strong>Peak fitting</strong><i>→</i><span>Temperature</span><i>→</i><span>Electron density</span><i>→</i><span>LTE check</span><i>→</i><span>Report</span></div></section>
+
+    <section class="workspace section-pad-small">
+      <div class="shell">
+        <div class="workspace-heading"><div><p class="eyebrow"><span></span> Guided workspace</p><h2>Fit one peak, step by step.</h2></div><p id="fit-status" role="status" aria-live="polite">Synthetic demonstration data are loaded. They are for learning and software testing—not elemental identification.</p></div>
+        <div class="workspace-grid">
+          <aside class="control-panel" aria-label="Peak fitting controls">
+            <section class="control-section">
+              <span class="control-number">01</span><h3>Load a spectrum</h3><p>Use two columns: wavelength first and intensity second. A header row is allowed.</p>
+              <label class="file-control" for="peak-file"><strong>Choose CSV or TXT</strong><small>Processed privately in this browser</small></label><input id="peak-file" class="file-input" type="file" accept=".csv,.txt,text/csv,text/plain">
+              <button class="secondary-button" id="restore-peak-demo" type="button">Restore learning example</button>
+            </section>
+            <section class="control-section">
+              <span class="control-number">02</span><h3>Select the peak region</h3><p>Keep one isolated peak inside this interval. Nearby peaks can distort the answer.</p>
+              <div class="input-pair"><label>From <span>nm</span><input id="region-min" type="number" step="any" value="499.3"></label><label>To <span>nm</span><input id="region-max" type="number" step="any" value="500.7"></label></div>
+            </section>
+            <section class="control-section">
+              <span class="control-number">03</span><h3>Choose preparation</h3><label class="field-label" for="baseline-model">Baseline treatment</label><select id="baseline-model"><option value="linear">Linear fit to region edges</option><option value="none">No baseline subtraction</option></select><small class="field-explain">The edge method estimates a sloping background from points at both ends, then subtracts it before fitting.</small>
+            </section>
+            <section class="control-section">
+              <span class="control-number">04</span><h3>Compare profiles</h3><label class="field-label" for="profile-model">Line-shape model</label><select id="profile-model"><option value="auto">Auto: lowest AICc</option><option value="gaussian">Gaussian</option><option value="lorentzian">Lorentzian</option><option value="pseudo">Pseudo-Voigt</option></select><small class="field-explain">Auto fits all three and selects the lowest corrected Akaike information criterion (AICc).</small>
+            </section>
+            <button class="download-button" id="download-peak-fit" type="button">Download fit results <span aria-hidden="true">↓</span></button>
+          </aside>
+
+          <div class="results-panel">
+            <div class="metric-grid" aria-label="Main fit results">
+              <article><span>Selected model</span><strong id="metric-model">—</strong></article><article><span>Peak centre</span><strong id="metric-centre">—</strong></article><article><span>FWHM</span><strong id="metric-fwhm">—</strong></article><article><span>Fit quality R²</span><strong id="metric-r2">—</strong></article>
+            </div>
+            <section class="explanation-card" id="fit-explanation" aria-live="polite"><div class="result-kicker">Plain-language result</div><h2 id="result-heading">The learning example is ready.</h2><p id="result-summary">The analyzer is fitting the selected region and will explain the result here.</p><div class="quality-badge" id="quality-badge">CALCULATING</div></section>
+
+            <section class="chart-card" aria-labelledby="fit-chart-title">
+              <div class="chart-heading"><div><span>Interactive figure 01</span><h2 id="fit-chart-title">Measured points and fitted profile</h2></div><div class="legend"><span><i class="legend-data"></i>Corrected data</span><span><i class="legend-fit"></i>Fitted curve</span></div></div>
+              <div class="chart-wrap"><svg id="peak-chart" viewBox="0 0 1000 470" role="img" aria-labelledby="fit-chart-title fit-chart-desc"><desc id="fit-chart-desc">Measured spectral points with the selected fitted line profile.</desc></svg></div>
+              <p class="chart-caption"><strong>How to read this:</strong> FWHM is the horizontal width of the fitted peak where its height has fallen to half of its maximum. It is shown by the orange marker.</p>
+            </section>
+
+            <section class="chart-card residual-card" aria-labelledby="residual-title">
+              <div class="chart-heading"><div><span>Diagnostic figure 02</span><h2 id="residual-title">Residuals: data minus fit</h2></div></div>
+              <div class="residual-wrap"><svg id="residual-chart" viewBox="0 0 1000 250" role="img" aria-labelledby="residual-title residual-desc"><desc id="residual-desc">Residuals between observed intensities and fitted values.</desc></svg></div>
+              <p class="chart-caption">Small points scattered around zero are desirable. Curves, clusters or one-sided residuals suggest that the chosen model, baseline or peak region may be inadequate.</p>
+            </section>
+
+            <section class="comparison-card" aria-labelledby="comparison-title"><div class="comparison-intro"><span>Model check</span><h2 id="comparison-title">Why was this profile selected?</h2><p>Lower AICc is preferred because it rewards a smaller fitting error while penalizing extra parameters. Compare the residuals too; one score is not enough.</p></div><div class="table-scroll"><table><thead><tr><th>Profile</th><th>FWHM</th><th>R²</th><th>RMSE</th><th>AICc</th><th>Decision</th></tr></thead><tbody id="model-table"></tbody></table></div></section>
+
+            <section class="detail-grid">
+              <article><span>Fitted amplitude</span><strong id="detail-amplitude">—</strong><p>Estimated height above the corrected baseline.</p></article><article><span>Integrated peak area</span><strong id="detail-area">—</strong><p>Area under the fitted profile in intensity·nm.</p></article><article><span>Centre uncertainty</span><strong id="detail-centre-uncertainty">—</strong><p>Approximate one-standard-deviation fit uncertainty.</p></article><article><span>FWHM uncertainty</span><strong id="detail-width-uncertainty">—</strong><p>Fit-only approximation; calibration and model uncertainty are excluded.</p></article>
+            </section>
+
+            <section class="next-step-card"><div><span>Use the measured width</span><h2>Continue to electron density.</h2><p>The next tool can receive this fitted centre, FWHM and fit uncertainty. You must still enter instrumental broadening and a valid published Stark parameter.</p></div><a id="send-to-stark" href="stark-electron-density-analyzer.html">Open Stark analyzer with this result <span aria-hidden="true">→</span></a></section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="learning-section section-pad-small">
+      <div class="shell learning-grid"><div><p class="eyebrow eyebrow-light"><span></span> Beginner guide</p><h2>What the three shapes mean.</h2><p>No line profile proves a mechanism on its own. These are compact mathematical descriptions of the measured peak.</p></div><div class="definition-list">
+        <article><span>01</span><div><h3>Gaussian</h3><p>A bell-shaped profile with relatively light wings. Doppler and many instrumental contributions are commonly Gaussian-like.</p></div></article>
+        <article><span>02</span><div><h3>Lorentzian</h3><p>A profile with broader wings. Collision and pressure effects, including Stark broadening under suitable conditions, are commonly treated as Lorentzian-like.</p></div></article>
+        <article><span>03</span><div><h3>Pseudo-Voigt</h3><p>A weighted mixture of Gaussian and Lorentzian profiles sharing one centre and FWHM. It is a practical approximation, not an exact physical separation.</p></div></article>
+        <article><span>04</span><div><h3>FWHM</h3><p>Full width at half maximum: the wavelength distance between the two locations where the fitted peak reaches half its fitted height.</p></div></article>
+      </div></div>
+    </section>
+
+    <section class="limitations section-pad-small"><div class="shell limitations-grid"><div><p class="eyebrow"><span></span> Scientific boundaries</p><h2>Before reporting a width.</h2></div><div><ul><li>Fit one isolated, unsaturated peak with enough points across both sides.</li><li>Inspect the baseline and residual plot; a high R² alone does not validate a model.</li><li>The displayed uncertainty describes local least-squares precision only. Add wavelength calibration, resolution, repeatability and model-choice uncertainty separately.</li><li>For Stark analysis, correct instrumental and other non-Stark broadening and use an appropriate published parameter.</li></ul><p class="source-note"><strong>Scientific reading:</strong> <a href="https://www.nist.gov/pml/atomic-spectroscopy-compendium-basic-ideas-notation-data-and-formulas/atomic-spectroscopy-6" target="_blank" rel="noopener noreferrer">NIST spectral line shapes</a> · <a href="https://www.itl.nist.gov/div898/handbook/pmd/section1/pmd142.htm" target="_blank" rel="noopener noreferrer">NIST nonlinear least squares</a> · <a href="https://doi.org/10.1107/S0021889887087090" target="_blank" rel="noopener noreferrer">Thompson–Cox–Hastings pseudo-Voigt reference</a></p></div></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="shell footer-grid"><div><strong>Muhammad Sohail</strong><span>Research Master's (MPhil) in Physics · Pakistan</span></div><p>Laser spectroscopy · LIBS · Experimental physics</p><span>© <span data-year></span> Muhammad Sohail</span></div></footer>
+  <script src="assets/js/main.js"></script><script src="assets/js/peak-fitter.js"></script>
+</body>
+</html>

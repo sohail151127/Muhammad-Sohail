@@ -128,9 +128,25 @@
     const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download='stark-electron-density-analysis.csv';document.body.append(link);link.click();link.remove();URL.revokeObjectURL(url);
   }
 
+  function applyPeakFitQuery() {
+    const query = new URLSearchParams(window.location.search);
+    const mapping = { wavelength:'centre-wavelength', measuredWidth:'measured-width', widthUncertainty:'measured-uncertainty', lineLabel:'line-label' };
+    Object.entries(mapping).forEach(([parameter,id]) => {
+      if (!query.has(parameter)) return;
+      const supplied = query.get(parameter);
+      if (id === 'line-label') {
+        fields[id].value = supplied.slice(0, 100);
+        return;
+      }
+      const numeric = Number(supplied);
+      if (Number.isFinite(numeric) && numeric >= 0) fields[id].value = numeric;
+    });
+  }
+
   ids.forEach((id)=>fields[id].addEventListener(fields[id].tagName === 'SELECT' ? 'change' : 'input',calculate));
   document.querySelectorAll('[data-help]').forEach((button)=>button.addEventListener('click',()=>{document.querySelectorAll('[data-help]').forEach((item)=>item.classList.toggle('is-active',item===button));document.getElementById('help-message').textContent=help[button.dataset.help];}));
   document.getElementById('restore-stark').addEventListener('click',()=>{Object.entries(demo).forEach(([id,value])=>{fields[id].value=value;});calculate();});
   document.getElementById('download-stark').addEventListener('click',downloadCSV);
+  applyPeakFitQuery();
   calculate();
 })();
