@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" class="stark-root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A guided Stark-broadening and electron-density analyzer by Muhammad Sohail for transparent LIBS plasma diagnostics.">
+  <meta name="theme-color" content="#14243b">
+  <title>Stark Broadening & Electron Density Analyzer — Muhammad Sohail</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/stark-analyzer.css">
+</head>
+<body class="stark-page">
+  <a class="skip-link" href="#stark-tool">Skip to analyzer</a>
+  <header class="site-header" data-header>
+    <div class="shell header-inner">
+      <a class="brand" href="index.html" aria-label="Muhammad Sohail home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><strong>Muhammad Sohail</strong><small>Physics · Spectroscopy</small></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle><span class="sr-only">Open navigation</span><span></span><span></span><span></span></button>
+      <nav class="nav" id="primary-navigation" aria-label="Primary navigation" data-nav><a href="index.html#home">Home</a><a href="index.html#research">Research</a><a href="libs-spectrum-analyzer.html">Spectrum</a><a href="laser-experiment-calculator.html">Laser</a><a href="boltzmann-plasma-analyzer.html">Temperature</a><a class="is-active" href="stark-electron-density-analyzer.html" aria-current="page">Density</a><a href="cv.html">CV</a><a class="nav-cta" href="index.html#contact">Contact</a></nav>
+    </div>
+  </header>
+
+  <main id="stark-tool">
+    <section class="stark-hero">
+      <div class="shell stark-hero-grid">
+        <div>
+          <p class="eyebrow"><span></span> Guided LIBS plasma diagnostic · Line broadening</p>
+          <h1>Stark Broadening & <em>Electron Density.</em></h1>
+          <p class="stark-intro">Estimate how many free electrons occupy each cubic centimetre of a plasma using the width of one carefully selected emission line. The tool explains the correction, calculation and scientific cautions before interpreting the number.</p>
+          <div class="start-note"><strong>Begin with the example.</strong><span>The prepared line is synthetic teaching data—not a measured spectrum or a claimed elemental identification.</span></div>
+        </div>
+        <aside class="hero-equation" aria-label="Main Stark broadening equation">
+          <span>For an isolated non-hydrogen line</span>
+          <div>N<sub>e</sub> = N<sub>ref</sub> × Δλ<sub>Stark</sub> ÷ Δλ<sub>ref</sub></div>
+          <dl><div><dt>Measured input</dt><dd>Emission-line FWHM</dd></div><div><dt>Atomic reference</dt><dd>Stark width at N<sub>ref</sub></dd></div><div><dt>Calculated estimate</dt><dd>Electron density, N<sub>e</sub> (cm⁻³)</dd></div></dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="idea-strip" aria-label="Stark analysis in three ideas"><div class="shell idea-grid"><article><span>01</span><div><strong>Measure a width</strong><p>Fit an isolated emission peak and record its full width at half maximum, called FWHM.</p></div></article><article><span>02</span><div><strong>Remove instrument width</strong><p>Estimate the part of the observed width caused by the spectrometer rather than the plasma.</p></div></article><article><span>03</span><div><strong>Scale a reference</strong><p>Compare the corrected width with a published Stark width at a known electron density.</p></div></article></div></section>
+
+    <section class="stark-workspace" aria-labelledby="workspace-title">
+      <div class="shell">
+        <div class="workspace-intro"><div><p class="eyebrow"><span></span> Interactive workspace</p><h2 id="workspace-title">Turn line width into an estimate.</h2></div><div><p>Change any value and the result updates immediately. Units are written beside every input, and the example is deliberately labelled as synthetic.</p><button class="restore-example" type="button" id="restore-stark">Restore teaching example</button></div></div>
+
+        <div class="analysis-grid">
+          <section class="input-card" aria-labelledby="input-title">
+            <div class="card-heading"><div><span>Step 1 · Inputs</span><h3 id="input-title">Describe the line and reference</h3></div><p>Use values from one isolated, fitted line. Do not enter the width of a group of overlapping peaks.</p></div>
+            <div class="input-groups">
+              <fieldset><legend>Measured emission line</legend>
+                <label><span>Line label <button class="help-dot" type="button" data-help="label" aria-label="Explain line label">?</button></span><input id="line-label" type="text" value="Synthetic isolated line I"><small>A name for your record, such as Fe I 538.34 nm.</small></label>
+                <div class="field-pair"><label><span>Centre wavelength <button class="help-dot" type="button" data-help="wavelength" aria-label="Explain centre wavelength">?</button></span><span class="unit-input"><input id="centre-wavelength" type="number" min="0" step="any" value="500"><b>nm</b></span></label><label><span>Measured FWHM <button class="help-dot" type="button" data-help="measured" aria-label="Explain measured FWHM">?</button></span><span class="unit-input"><input id="measured-width" type="number" min="0" step="any" value="0.24"><b>nm</b></span></label></div>
+                <div class="field-pair"><label><span>FWHM uncertainty <button class="help-dot" type="button" data-help="measured-uncertainty" aria-label="Explain measured width uncertainty">?</button></span><span class="unit-input"><input id="measured-uncertainty" type="number" min="0" step="any" value="0.01"><b>nm</b></span></label><label><span>Instrumental FWHM <button class="help-dot" type="button" data-help="instrument" aria-label="Explain instrumental width">?</button></span><span class="unit-input"><input id="instrument-width" type="number" min="0" step="any" value="0.06"><b>nm</b></span></label></div>
+                <div class="field-pair"><label><span>Instrument uncertainty</span><span class="unit-input"><input id="instrument-uncertainty" type="number" min="0" step="any" value="0.005"><b>nm</b></span></label><label><span>Width correction model <button class="help-dot" type="button" data-help="correction" aria-label="Explain correction model">?</button></span><select id="correction-model"><option value="quadrature">Gaussian quadrature</option><option value="lorentzian">Lorentzian subtraction</option><option value="none">No correction</option></select></label></div>
+              </fieldset>
+
+              <fieldset><legend>Published Stark reference</legend>
+                <div class="field-pair"><label><span>Published width value <button class="help-dot" type="button" data-help="reference-width" aria-label="Explain reference width">?</button></span><span class="unit-input"><input id="reference-width" type="number" min="0" step="any" value="0.05"><b>nm</b></span></label><label><span>Published value means</span><select id="reference-type"><option value="half">Electron-impact half-width, w</option><option value="full">Full Stark FWHM, Δλref</option></select></label></div>
+                <div class="field-pair"><label><span>Reference electron density <button class="help-dot" type="button" data-help="reference-density" aria-label="Explain reference density">?</button></span><span class="unit-input"><input id="reference-density" type="number" min="0" step="any" value="1e16"><b>cm⁻³</b></span></label><label><span>Reference-width uncertainty</span><span class="unit-input"><input id="reference-uncertainty" type="number" min="0" step="any" value="10"><b>%</b></span></label></div>
+                <div class="field-pair"><label><span>Reference temperature</span><span class="unit-input"><input id="reference-temperature" type="number" min="0" step="any" value="10000"><b>K</b></span></label><label><span>Your plasma temperature</span><span class="unit-input"><input id="plasma-temperature" type="number" min="0" step="any" value="9500"><b>K</b></span></label></div>
+              </fieldset>
+            </div>
+            <div class="help-message" id="help-message" role="status">Select a question mark if an input is unfamiliar.</div>
+          </section>
+
+          <aside class="density-panel" aria-label="Electron density results">
+            <div class="result-kicker">Step 2 · Result</div><h3>Electron density estimate</h3>
+            <strong class="density-value" id="electron-density">—</strong><span class="density-uncertainty" id="density-uncertainty">—</span>
+            <dl class="density-metrics"><div><dt>Corrected Stark FWHM</dt><dd id="corrected-width">—</dd></div><div><dt>Reference Stark FWHM</dt><dd id="reference-fwhm">—</dd></div><div><dt>Density order</dt><dd id="density-order">—</dd></div><div><dt>Instrument/observed width</dt><dd id="instrument-share">—</dd></div><div><dt>Temperature difference</dt><dd id="temperature-difference">—</dd></div></dl>
+            <div class="density-reading" id="density-reading" role="status">Enter positive widths and a reference density to calculate a result.</div>
+            <div class="integrity-warning"><strong>This is an estimate, not direct proof.</strong><p>The equation assumes that the corrected width is mainly Stark broadening and that the published parameter matches the chosen transition and relevant plasma conditions.</p></div>
+          </aside>
+        </div>
+
+        <section class="profile-card" aria-labelledby="profile-title">
+          <div class="card-heading"><div><span>Step 3 · Visual check</span><h3 id="profile-title">What the width correction means</h3></div><div class="profile-key"><span><i></i>Observed width</span><span><i></i>Corrected Stark width</span><span><i></i>Instrument width</span></div></div>
+          <div class="profile-wrap"><svg id="stark-profile" viewBox="0 0 1000 470" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="profile-title profile-description"><desc id="profile-description">Illustrative normalized emission-line profiles showing observed, corrected Stark and instrumental widths.</desc></svg></div>
+          <p class="profile-caption">These smooth curves illustrate the entered widths; they are not a fit to experimental detector data. A real analysis should fit the measured spectrum and examine residuals.</p>
+        </section>
+
+        <div class="calculation-strip"><div><span>Calculation used</span><strong id="calculation-used">—</strong></div><button type="button" id="download-stark">Download calculation CSV <span aria-hidden="true">↓</span></button></div>
+      </div>
+    </section>
+
+    <section class="stark-walkthrough section-pad-small"><div class="shell walkthrough-grid"><div><p class="eyebrow"><span></span> Understand every step</p><h2>From a peak to N<sub>e</sub>.</h2><p>The calculation is short, but the scientific choices around it decide whether the result is meaningful.</p></div><ol><li><span>01</span><div><h3>Fit the observed peak</h3><p>Measure FWHM from a background-corrected, isolated emission line. FWHM is the horizontal width of the peak at half its maximum height.</p></div></li><li><span>02</span><div><h3>Estimate plasma width</h3><p>Remove instrumental broadening using the selected approximation. The corrected value is treated as the Stark FWHM only when other broadening contributions are small.</p></div></li><li><span>03</span><div><h3>Standardize the reference</h3><p>If a source reports electron-impact half-width w, the corresponding reference FWHM is 2w. If it already reports full width, no factor of two is added.</p></div></li><li><span>04</span><div><h3>Scale to electron density</h3><p>For a suitable isolated non-hydrogen line, width is approximately linear with electron density: N<sub>e</sub> = N<sub>ref</sub>(Δλ<sub>Stark</sub>/Δλ<sub>ref</sub>).</p></div></li></ol></div></section>
+
+    <section class="validity-section section-pad-small"><div class="shell validity-grid"><div><p class="eyebrow eyebrow-light"><span></span> Scientific conditions</p><h2>Check these before reporting.</h2><p>A neat answer on screen cannot rescue an unsuitable line or an incorrect reference parameter.</p></div><ul><li><strong>Not a hydrogen line</strong><span>This simple linear calculator is for suitable isolated non-hydrogen lines. Hydrogen and hydrogen-like lines require specialized profiles or empirical relations.</span></li><li><strong>Isolated and unblended</strong><span>Nearby transitions can make one apparent peak wider than the line being studied.</span></li><li><strong>Instrument characterized</strong><span>Measure instrumental width with a narrow calibration source near the wavelength of interest.</span></li><li><strong>Other widths assessed</strong><span>Doppler, resonance and van der Waals broadening should be estimated rather than automatically assigned to Stark broadening.</span></li><li><strong>Optical depth checked</strong><span>Self-absorption can change both the shape and width of a strong emission line.</span></li><li><strong>Correct atomic parameter</strong><span>The reference width must belong to the same transition and use a compatible temperature and density convention.</span></li><li><strong>Approximation documented</strong><span>Gaussian quadrature and Lorentzian subtraction are simplified width corrections, not complete profile deconvolution.</span></li></ul></div></section>
+
+    <section class="stark-glossary section-pad-small"><div class="shell"><div class="glossary-heading"><p class="eyebrow"><span></span> Beginner glossary</p><h2>The vocabulary behind line width.</h2></div><dl class="glossary-grid"><div><dt>Stark broadening</dt><dd>Widening of a spectral line caused by electric fields and collisions involving charged particles in a plasma.</dd></div><div><dt>Electron density, N<sub>e</sub></dt><dd>The number of free electrons per unit volume, reported here as electrons per cubic centimetre (cm⁻³).</dd></div><div><dt>FWHM</dt><dd>Full width at half maximum: the wavelength distance between the two sides of a peak at half of its maximum height.</dd></div><div><dt>Half-width, w</dt><dd>Half of a full line width. Some literature reports w, while databases such as STARK-B report full width; confusing them creates a factor-of-two error.</dd></div><div><dt>Instrumental broadening</dt><dd>Line width introduced by the spectrometer, slit, detector and optical system rather than by the plasma.</dd></div><div><dt>Lorentzian profile</dt><dd>A line-shape model with a narrow centre and extended wings, commonly associated with collision broadening.</dd></div><div><dt>Gaussian profile</dt><dd>A bell-shaped line model often used to approximate instrumental or Doppler broadening.</dd></div><div><dt>Deconvolution</dt><dd>The process of separating the instrument response from the physical line profile.</dd></div><div><dt>Isolated line</dt><dd>A transition sufficiently separated from neighbouring lines for its width and shape to be studied independently.</dd></div><div><dt>Self-absorption</dt><dd>Reabsorption of emitted light by cooler atoms of the same species, which can distort a spectral line.</dd></div></dl>
+        <div class="reference-box"><div><strong>Where to obtain and verify Stark data</strong><p>STARK-B provides calculated full widths and shifts for isolated lines at stated temperatures and perturber densities. NIST explains physical and instrumental contributions to spectral-line shapes. The linked LIBS review presents the linear non-hydrogen relation used here.</p></div><ul><li><a href="https://stark-b.obspm.fr/index.php/description" target="_blank" rel="noopener noreferrer">STARK-B · Data description ↗</a></li><li><a href="https://www.nist.gov/pml/atomic-spectroscopy-compendium-basic-ideas-notation-data-and-formulas/atomic-spectroscopy-6" target="_blank" rel="noopener noreferrer">NIST · Spectral line shapes ↗</a></li><li><a href="https://www.mdpi.com/2076-3417/10/14/4973" target="_blank" rel="noopener noreferrer">Applied Sciences · LIBS parameters review ↗</a></li></ul></div>
+      </div></section>
+  </main>
+
+  <footer class="site-footer"><div class="shell footer-grid"><div><strong>Muhammad Sohail</strong><span>Research Master's (MPhil) in Physics · Pakistan</span></div><p>Laser spectroscopy · LIBS · Experimental physics</p><span>© <span data-year></span> Muhammad Sohail</span></div></footer>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/stark-analyzer.js"></script>
+</body>
+</html>
