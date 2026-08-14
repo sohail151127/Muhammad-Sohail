@@ -6,8 +6,22 @@ A dependency-free static academic website designed for funded MS, MS-to-PhD, PhD
 
 - `index.html` — academic homepage
 - `research.html` — detailed LIBS/AAS/CF-LIBS/PCA case study
+- `libs-spectrum-analyzer.html` — interactive browser-based spectrum analysis project
 - `cv.html` — privacy-safe academic CV with Print / Save as PDF
 - `404.html` — custom fallback page
+
+## LIBS Spectrum Analyzer
+
+The analyzer accepts a CSV or tab-delimited text file whose first column is wavelength and whose remaining columns are sample intensities. It supports:
+
+- Multiple-sample comparison
+- Optional linear edge-baseline correction
+- Maximum or integrated-area normalization
+- Adjustable candidate-peak detection
+- Interactive SVG inspection
+- Processed CSV download
+
+All uploaded files remain in the browser and are not sent to a server. The bundled demonstration data are synthetic and clearly labelled as such.
 
 ## Preview locally
 
@@ -21,37 +35,34 @@ Then open `http://localhost:8080`.
 
 ## Deploy
 
-The folder can be deployed directly—no build command is required.
-
-- GitHub Pages: push the folder contents to a repository and enable Pages.
-- Cloudflare Pages: upload the folder or connect the repository; leave the build command empty and set the output directory to `/`.
-- Netlify: drag this folder into Netlify Drop.
-
-Use a short professional domain if possible, such as `muhammadsohailphysics.com` or a concise `.me` domain.
+The repository root is deployed through GitHub Pages; no build command is required. Changes merged or pushed to `main` are published automatically.
 
 ## Update content
 
 - Main profile and sections: edit `index.html`.
 - Thesis methodology, figures and conclusions: edit `research.html`.
+- Spectrum analyzer interface: edit `libs-spectrum-analyzer.html`.
+- Spectrum processing logic: edit `assets/js/spectrum-analyzer.js`.
+- Analyzer styling: edit `assets/css/spectrum-analyzer.css`.
 - Academic record: edit `cv.html`.
-- Colors, spacing and typography: edit `assets/css/styles.css`.
-- Interactions: edit `assets/js/main.js`.
+- Shared colors, spacing and typography: edit `assets/css/styles.css`.
+- Shared interactions: edit `assets/js/main.js`.
 - Research images: place files in `assets/images/research/` and reference them with relative paths.
 
-## Update the live GitHub Pages site
+The header navigation is shared across every page. Homepage menu items scroll to sections, while research, analyzer and CV pages provide detailed secondary content. Degree wording preserves the official MPhil title and explains it internationally as a research master's.
 
-Open the GitHub repository and choose **Add file → Upload files**. Upload the contents of this folder again, including the `assets` folder, and confirm replacement of the existing files. Commit directly to `main`; GitHub Pages will publish the revision automatically.
+## Publishing workflow
 
-The header navigation is shared across every page. Homepage menu items scroll to sections, while the research case study and CV remain detailed secondary pages. Degree wording preserves the official MPhil title and explains it internationally as a research master's.
+Repository-level instructions in `AGENTS.md` direct Codex to validate completed changes, commit them and push to `origin main` unless a request is explicitly marked preview-only or not for publication.
 
 ## Privacy rules
 
-Do not add CNIC, passport, birth date, registration/roll numbers, home address, signatures, private referee details or unredacted transcripts. Confirm any new public claims against source evidence before publishing.
+Do not add CNIC, passport, birth date, registration or roll numbers, home address, signatures, private referee details, private research files or unredacted transcripts. Confirm any new public claims against source evidence before publishing.
 
 ## Recommended next additions
 
-1. The existing portrait asset is intentionally retained but not currently rendered; it can be reconsidered later.
-2. Confirm the preferred public email and all academic profile links.
-3. Add a polished, current academic CV PDF after review.
-4. Add GitHub repositories for completed scientific-computing projects.
-5. Add a domain and update Open Graph metadata with the final public URL.
+1. Confirm the preferred public email and academic profile links.
+2. Add a polished, current academic CV PDF after review.
+3. Add another carefully documented scientific-computing project.
+4. Consider a professional domain and final Open Graph metadata.
+5. The existing portrait asset is intentionally retained but not rendered; it can be reconsidered later.

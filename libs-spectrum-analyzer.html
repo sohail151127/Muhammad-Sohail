@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A browser-based LIBS spectrum analyzer by Muhammad Sohail for plotting, baseline correction, normalization, sample comparison and candidate-peak review.">
+  <meta name="theme-color" content="#14243b">
+  <title>LIBS Spectrum Analyzer — Muhammad Sohail</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/spectrum-analyzer.css">
+</head>
+<body class="analyzer-page">
+  <a class="skip-link" href="#analyzer">Skip to analyzer</a>
+
+  <header class="site-header" data-header>
+    <div class="shell header-inner">
+      <a class="brand" href="index.html" aria-label="Muhammad Sohail home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span><strong>Muhammad Sohail</strong><small>Physics · Spectroscopy</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle><span class="sr-only">Open navigation</span><span></span><span></span><span></span></button>
+      <nav class="nav" id="primary-navigation" aria-label="Primary navigation" data-nav>
+        <a href="index.html#home">Home</a>
+        <a href="index.html#research">Research</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#skills">Skills</a>
+        <a class="is-active" href="libs-spectrum-analyzer.html" aria-current="page">Analyzer</a>
+        <a href="cv.html">CV</a>
+        <a class="nav-cta" href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="analyzer">
+    <section class="analyzer-hero">
+      <div class="shell analyzer-hero-grid">
+        <div>
+          <p class="eyebrow"><span></span> Scientific computing project · Browser based</p>
+          <h1>LIBS Spectrum <em>Analyzer.</em></h1>
+          <p class="analyzer-intro">Load wavelength–intensity data, compare multiple samples, apply transparent preprocessing and inspect candidate peaks without installing software.</p>
+          <div class="analyzer-badges" aria-label="Project features"><span>CSV input</span><span>Baseline correction</span><span>Normalization</span><span>Peak review</span></div>
+        </div>
+        <aside class="method-note">
+          <span>Method note 01</span>
+          <p>This exploratory tool supports visual inspection; candidate peaks are not automatic elemental identifications. Confirm assignments against calibrated reference data and experimental conditions.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="analyzer-workspace section-pad-small">
+      <div class="shell">
+        <div class="workspace-heading">
+          <div><p class="eyebrow"><span></span> Interactive workspace</p><h2>From CSV to a readable spectrum.</h2></div>
+          <p id="dataset-status" role="status" aria-live="polite">Synthetic demonstration data are loaded. Upload your own CSV at any time.</p>
+        </div>
+
+        <div class="analyzer-layout">
+          <aside class="control-panel" aria-label="Spectrum controls">
+            <section class="control-section">
+              <div class="control-number">01</div>
+              <div><h3>Load data</h3><p>First column: wavelength. Remaining columns: sample intensities.</p></div>
+              <label class="file-control" for="spectrum-file"><span>Choose spectral data</span><small>CSV or TXT · processed locally</small></label>
+              <input class="spectrum-file-input" id="spectrum-file" type="file" accept=".csv,.txt,text/csv,text/plain">
+              <button class="control-button" id="load-demo" type="button">Restore demonstration data</button>
+            </section>
+
+            <section class="control-section">
+              <div class="control-number">02</div>
+              <div><h3>Preprocess</h3><p>Applied independently to each intensity column.</p></div>
+              <label class="switch-row"><span><strong>Baseline correction</strong><small>Subtract a linear edge baseline</small></span><input id="baseline-toggle" type="checkbox" checked><i aria-hidden="true"></i></label>
+              <label class="select-row" for="normalization"><span>Normalization</span><select id="normalization"><option value="max">Maximum intensity</option><option value="area">Integrated area</option><option value="none">None</option></select></label>
+            </section>
+
+            <section class="control-section">
+              <div class="control-number">03</div>
+              <div><h3>Candidate peaks</h3><p>Show local maxima above a relative threshold.</p></div>
+              <label class="range-row" for="peak-threshold"><span>Threshold <output id="threshold-output">55%</output></span><input id="peak-threshold" type="range" min="20" max="90" value="55" step="5"></label>
+              <label class="switch-row"><span><strong>Peak labels</strong><small>Annotate strongest candidates</small></span><input id="peak-toggle" type="checkbox" checked><i aria-hidden="true"></i></label>
+            </section>
+
+            <button class="download-button" id="download-data" type="button">Download processed CSV <span aria-hidden="true">↓</span></button>
+          </aside>
+
+          <div class="analysis-panel">
+            <div class="metric-grid" aria-label="Dataset summary">
+              <article><span>Points</span><strong id="metric-points">—</strong></article>
+              <article><span>Range</span><strong id="metric-range">—</strong></article>
+              <article><span>Samples</span><strong id="metric-samples">—</strong></article>
+              <article><span>Strongest candidate</span><strong id="metric-peak">—</strong></article>
+            </div>
+
+            <section class="chart-card" aria-labelledby="chart-title">
+              <div class="chart-heading"><div><span>Interactive figure 01</span><h2 id="chart-title">Emission intensity by wavelength</h2></div><div class="legend" id="chart-legend" aria-label="Spectrum legend"></div></div>
+              <div class="chart-wrap"><svg id="spectrum-chart" role="img" aria-labelledby="chart-title chart-description" viewBox="0 0 960 480" preserveAspectRatio="xMidYMid meet"><desc id="chart-description">Line chart of uploaded spectral intensity data.</desc></svg></div>
+              <p class="chart-caption"><span>Processing:</span> <strong id="processing-summary">Linear edge baseline · maximum normalization</strong>. Hover or focus the chart to inspect the nearest wavelength.</p>
+              <div class="chart-tooltip" id="chart-tooltip" hidden></div>
+            </section>
+
+            <section class="peak-card" aria-labelledby="peak-table-title">
+              <div><span>Candidate review</span><h2 id="peak-table-title">Strongest local maxima</h2><p>Values are ranked after the selected preprocessing. They are candidate signal maxima, not confirmed elemental lines.</p></div>
+              <div class="table-scroll"><table><thead><tr><th>Sample</th><th>Wavelength</th><th>Processed intensity</th><th>Relative height</th></tr></thead><tbody id="peak-table-body"></tbody></table></div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="analyzer-method section-pad-small">
+      <div class="shell method-grid">
+        <div><p class="eyebrow eyebrow-light"><span></span> Reproducible by design</p><h2>Simple processing with visible assumptions.</h2></div>
+        <ol>
+          <li><span>01</span><div><h3>Parse</h3><p>Numeric wavelength and intensity columns are read directly in the browser; files are not uploaded to a server.</p></div></li>
+          <li><span>02</span><div><h3>Correct</h3><p>An optional linear baseline is estimated from median intensities at the two spectrum edges and subtracted.</p></div></li>
+          <li><span>03</span><div><h3>Normalize</h3><p>Each sample can be divided by its maximum or integrated area to support visual comparison.</p></div></li>
+          <li><span>04</span><div><h3>Review</h3><p>Local maxima above the selected threshold are ranked for inspection and export.</p></div></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="shell footer-grid"><div><strong>Muhammad Sohail</strong><span>Research Master's (MPhil) in Physics · Pakistan</span></div><p>Laser spectroscopy · LIBS · Experimental physics</p><span>© <span data-year></span> Muhammad Sohail</span></div></footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/spectrum-analyzer.js"></script>
+</body>
+</html>
