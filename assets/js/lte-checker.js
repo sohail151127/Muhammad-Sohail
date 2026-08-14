@@ -50,7 +50,10 @@
     if(nominalPass&&conservativePass){output.status.textContent='Criterion met';output.status.className='status-badge is-pass';output.heading.textContent='The entered density exceeds the threshold.';output.summary.textContent=`The nominal density is ${format(nominalMargin,2)} times the McWhirter minimum. Even the entered lower density bound remains above the upper threshold bound. This supports only this necessary LTE condition.`;}
     else if(nominalPass){output.status.textContent='Close within uncertainty';output.status.className='status-badge is-close';output.heading.textContent='The central values pass, but the cautious comparison does not.';output.summary.textContent=`The nominal density is ${format(nominalMargin,2)} times the minimum, while the conservative margin is ${format(conservativeMargin,2)}. Report the result as uncertainty-sensitive and review the measurements.`;}
     else{output.status.textContent='Criterion not met';output.status.className='status-badge is-fail';output.heading.textContent='The entered density is below the threshold.';output.summary.textContent=`The density reaches only ${format(nominalMargin,2)} of the calculated minimum. The McWhirter necessary condition is not met for these inputs, so an LTE assumption is not supported by this test.`;}
-    latest={...data,energyEV,energyUncertaintyEV,required,requiredUncertainty,nominalMargin,conservativeMargin,lowerDensity,upperRequired,nominalPass,conservativePass};drawChart(latest);
+    latest={...data,energyEV,energyUncertaintyEV,required,requiredUncertainty,nominalMargin,conservativeMargin,lowerDensity,upperRequired,nominalPass,conservativePass};
+    const reportQuery=new URLSearchParams({temperature:String(data.temperature),temperatureUncertainty:String(data.temperatureUncertainty),density:String(data.density),densityUncertainty:String(data.densityUncertainty),gap:String(energyEV),gapUncertainty:String(energyUncertaintyEV)});
+    document.getElementById('lte-report-link').href=`libs-plasma-report-builder.html?${reportQuery.toString()}`;
+    drawChart(latest);
   }
 
   const ns='http://www.w3.org/2000/svg';

@@ -15,7 +15,7 @@
   <header class="site-header" data-header><div class="shell header-inner">
     <a class="brand" href="index.html" aria-label="Muhammad Sohail home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><strong>Muhammad Sohail</strong><small>Physics · Spectroscopy</small></span></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle><span class="sr-only">Open navigation</span><span></span><span></span><span></span></button>
-    <nav class="nav" id="primary-navigation" aria-label="Primary navigation" data-nav><a href="index.html#home">Home</a><a href="index.html#research">Research</a><a href="libs-spectrum-analyzer.html">Spectrum</a><a href="laser-experiment-calculator.html">Laser</a><a href="boltzmann-plasma-analyzer.html">Temperature</a><a href="stark-electron-density-analyzer.html">Density</a><a class="is-active" href="lte-mcwhirter-checker.html" aria-current="page">LTE</a><a href="cv.html">CV</a><a class="nav-cta" href="index.html#contact">Contact</a></nav>
+    <nav class="nav" id="primary-navigation" aria-label="Primary navigation" data-nav><a href="index.html#home">Home</a><a href="index.html#research">Research</a><a href="libs-spectrum-analyzer.html">Spectrum</a><a href="laser-experiment-calculator.html">Laser</a><a href="boltzmann-plasma-analyzer.html">Temp</a><a href="stark-electron-density-analyzer.html">Density</a><a class="is-active" href="lte-mcwhirter-checker.html" aria-current="page">LTE</a><a href="libs-plasma-report-builder.html">Report</a><a href="cv.html">CV</a><a class="nav-cta" href="index.html#contact">Contact</a></nav>
   </div></header>
 
   <main id="lte-tool">
@@ -43,6 +43,7 @@
       <aside class="lte-result-card" aria-label="McWhirter criterion result"><div class="result-kicker">Step 2 · Comparison</div><span id="lte-status" class="status-badge">—</span><h3 id="lte-result-heading">Waiting for valid inputs</h3><p id="lte-result-summary">Enter positive values to perform the comparison.</p>
         <div class="result-primary"><span>Measured electron density</span><strong id="measured-density-result">—</strong></div><div class="comparison-symbol" aria-hidden="true">versus</div><div class="result-primary required"><span>Minimum required density</span><strong id="required-density-result">—</strong></div>
         <dl class="lte-metrics"><div><dt>Nominal margin</dt><dd id="lte-margin">—</dd></div><div><dt>Conservative margin</dt><dd id="lte-conservative-margin">—</dd></div><div><dt>Energy used</dt><dd id="lte-energy-used">—</dd></div><div><dt>Required-density uncertainty</dt><dd id="required-uncertainty">—</dd></div></dl>
+        <a class="report-next-link" id="lte-report-link" href="libs-plasma-report-builder.html">Send these values to the report builder <span aria-hidden="true">→</span></a>
         <div class="result-caution"><strong>Necessary ≠ sufficient</strong><p>Passing this threshold alone does not demonstrate spatial homogeneity, stationarity, optical thinness, or equilibrium between all relevant processes.</p></div>
       </aside></div>
 

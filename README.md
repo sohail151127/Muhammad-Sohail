@@ -11,6 +11,7 @@ A dependency-free static academic website designed for funded MS, MS-to-PhD, PhD
 - `boltzmann-plasma-analyzer.html` — guided Boltzmann plot and plasma excitation-temperature analyzer
 - `stark-electron-density-analyzer.html` — guided Stark-broadening and electron-density analyzer
 - `lte-mcwhirter-checker.html` — guided LTE plausibility and McWhirter criterion checker
+- `libs-plasma-report-builder.html` — print-ready LIBS plasma diagnostics report builder
 - `cv.html` — privacy-safe academic CV with Print / Save as PDF
 - `404.html` — custom fallback page
 
@@ -56,6 +57,8 @@ The repository root is deployed through GitHub Pages; no build command is requir
 - Stark analyzer styling: edit `assets/css/stark-analyzer.css`.
 - LTE checker logic: edit `assets/js/lte-checker.js`.
 - LTE checker styling: edit `assets/css/lte-checker.css`.
+- Plasma report logic: edit `assets/js/plasma-report.js`.
+- Plasma report styling: edit `assets/css/plasma-report.css`.
 - Academic record: edit `cv.html`.
 - Shared colors, spacing and typography: edit `assets/css/styles.css`.
 - Shared interactions: edit `assets/js/main.js`.

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" class="report-root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A guided LIBS plasma diagnostics report builder by Muhammad Sohail for combining temperature, electron density and LTE plausibility results into a transparent printable summary.">
+  <meta name="theme-color" content="#14243b">
+  <title>LIBS Plasma Diagnostics Report Builder — Muhammad Sohail</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/plasma-report.css">
+</head>
+<body class="report-page">
+  <a class="skip-link" href="#report-builder">Skip to report builder</a>
+  <header class="site-header" data-header><div class="shell header-inner">
+    <a class="brand" href="index.html" aria-label="Muhammad Sohail home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><strong>Muhammad Sohail</strong><small>Physics · Spectroscopy</small></span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle><span class="sr-only">Open navigation</span><span></span><span></span><span></span></button>
+    <nav class="nav" id="primary-navigation" aria-label="Primary navigation" data-nav><a href="index.html#home">Home</a><a href="index.html#research">Research</a><a href="libs-spectrum-analyzer.html">Spectrum</a><a href="laser-experiment-calculator.html">Laser</a><a href="boltzmann-plasma-analyzer.html">Temp</a><a href="stark-electron-density-analyzer.html">Density</a><a href="lte-mcwhirter-checker.html">LTE</a><a class="is-active" href="libs-plasma-report-builder.html" aria-current="page">Report</a><a href="cv.html">CV</a><a class="nav-cta" href="index.html#contact">Contact</a></nav>
+  </div></header>
+
+  <main id="report-builder">
+    <section class="report-hero"><div class="shell report-hero-grid"><div>
+      <p class="eyebrow"><span></span> Capstone workflow · Scientific communication</p>
+      <h1>LIBS Plasma <em>Diagnostics Report.</em></h1>
+      <p class="report-intro">Bring temperature, electron density and McWhirter results into one clear scientific record. The live preview distinguishes estimates, documented checks and unresolved limitations before you print or export anything.</p>
+      <div class="privacy-note"><strong>Private by design.</strong><span>Everything is processed inside this browser page. No form values are uploaded to a server.</span></div>
+    </div><aside class="hero-report-map" aria-label="Report workflow summary"><span>One connected record</span><ol><li><b>01</b><div><strong>Results</strong><small>Temperature · density · LTE threshold</small></div></li><li><b>02</b><div><strong>Validity</strong><small>Documented checks · unresolved items</small></div></li><li><b>03</b><div><strong>Communication</strong><small>Interpretation · CSV · print/PDF</small></div></li></ol></aside></div></section>
+
+    <section class="report-workspace"><div class="shell">
+      <div class="workspace-intro"><div><p class="eyebrow"><span></span> Interactive report builder</p><h2>Write the evidence before the conclusion.</h2></div><div><p>Start with the synthetic example, then replace every value and note with information from the same experiment, observation region and acquisition timing.</p><button id="restore-report" class="restore-example" type="button">Restore teaching example</button></div></div>
+
+      <div class="builder-layout">
+        <aside class="builder-sidebar" aria-label="Report controls">
+          <section class="control-section is-open"><button type="button" class="control-heading" aria-expanded="true"><span><b>01</b>Report identity</span><i aria-hidden="true">−</i></button><div class="control-body">
+            <label>Report title<input id="report-title" type="text" value="LIBS Plasma Diagnostics Summary"></label>
+            <div class="control-pair"><label>Sample label<input id="sample-label" type="text" value="Synthetic teaching sample"></label><label>Report date<input id="report-date" type="date"></label></div>
+            <label>Analyst<input id="analyst-name" type="text" value="Muhammad Sohail"></label>
+            <label>Data provenance<select id="data-provenance"><option value="synthetic">Synthetic teaching example</option><option value="experimental">Experimental measurements</option><option value="literature">Published or literature values</option><option value="mixed">Mixed sources</option></select></label>
+          </div></section>
+
+          <section class="control-section is-open"><button type="button" class="control-heading" aria-expanded="true"><span><b>02</b>Diagnostic results</span><i aria-hidden="true">−</i></button><div class="control-body">
+            <div class="result-input"><div><label>Excitation temperature</label><a href="boltzmann-plasma-analyzer.html">Open analyzer ↗</a></div><div class="value-with-uncertainty"><span class="unit-input"><input id="report-temperature" type="number" min="0" step="any" value="9491"><b>K</b></span><em>±</em><span class="unit-input"><input id="report-temperature-uncertainty" type="number" min="0" step="any" value="117" aria-label="Temperature uncertainty"><b>K</b></span></div></div>
+            <div class="result-input"><div><label>Electron density</label><a href="stark-electron-density-analyzer.html">Open analyzer ↗</a></div><div class="value-with-uncertainty"><span class="unit-input"><input id="report-density" type="number" min="0" step="any" value="2.324e16"><b>cm⁻³</b></span><em>±</em><span class="unit-input"><input id="report-density-uncertainty" type="number" min="0" step="any" value="2.55e15" aria-label="Electron density uncertainty"><b>cm⁻³</b></span></div></div>
+            <div class="result-input"><div><label>McWhirter energy gap</label><a href="lte-mcwhirter-checker.html">Open checker ↗</a></div><div class="value-with-uncertainty"><span class="unit-input"><input id="report-energy-gap" type="number" min="0" step="any" value="3"><b>eV</b></span><em>±</em><span class="unit-input"><input id="report-energy-uncertainty" type="number" min="0" step="any" value="0.05" aria-label="Energy gap uncertainty"><b>eV</b></span></div></div>
+            <label>Temperature method<select id="temperature-method"><option>Boltzmann plot</option><option>Saha–Boltzmann plot</option><option>Other documented method</option></select></label>
+            <label>Density method<select id="density-method"><option>Stark broadening</option><option>Interferometry</option><option>Other documented method</option></select></label>
+          </div></section>
+
+          <section class="control-section is-open"><button type="button" class="control-heading" aria-expanded="true"><span><b>03</b>Validity record</span><i aria-hidden="true">−</i></button><div class="control-body check-list">
+            <p>Check an item only when your experiment or analysis has actually addressed it.</p>
+            <label><input type="checkbox" data-check="same-region" checked><span><strong>Same plasma region and time</strong><small>Temperature and density represent compatible sampling.</small></span></label>
+            <label><input type="checkbox" data-check="line-selection" checked><span><strong>Suitable isolated lines</strong><small>Blends and obvious self-reversal were avoided.</small></span></label>
+            <label><input type="checkbox" data-check="instrument" checked><span><strong>Instrument width addressed</strong><small>Instrumental broadening was measured or corrected.</small></span></label>
+            <label><input type="checkbox" data-check="response"><span><strong>Spectral response corrected</strong><small>Relative detector response was calibrated where required.</small></span></label>
+            <label><input type="checkbox" data-check="optical"><span><strong>Optical thinness assessed</strong><small>Self-absorption or optical depth was evaluated.</small></span></label>
+            <label><input type="checkbox" data-check="homogeneity"><span><strong>Homogeneity and timing assessed</strong><small>Spatial and temporal gradients were considered.</small></span></label>
+          </div></section>
+
+          <section class="control-section is-open"><button type="button" class="control-heading" aria-expanded="true"><span><b>04</b>Notes and traceability</span><i aria-hidden="true">−</i></button><div class="control-body">
+            <label>Experiment or dataset note<textarea id="experiment-note" rows="4">Synthetic values demonstrate the reporting workflow only. Replace them with results from one consistently sampled experiment.</textarea></label>
+            <label>Line and atomic-data note<textarea id="atomic-note" rows="4">Record the selected transitions, atomic-data source, fitting model and instrumental-width procedure in the final experimental record.</textarea></label>
+          </div></section>
+        </aside>
+
+        <div class="report-column">
+          <div class="report-actions"><div id="report-form-status" role="status">Teaching example ready.</div><button id="download-report-csv" type="button">Download CSV</button><button id="print-report" class="primary-action" type="button">Print / Save as PDF</button></div>
+          <article class="report-paper" id="report-paper" aria-label="Generated LIBS plasma diagnostics report">
+            <header class="paper-header"><div><span>Muhammad Sohail · Scientific computing portfolio</span><strong>LIBS PLASMA DIAGNOSTICS</strong></div><div><span>Report date</span><strong id="paper-date">—</strong></div></header>
+            <section class="paper-title"><span id="paper-provenance" class="provenance-badge">Synthetic teaching example</span><h2 id="paper-title">LIBS Plasma Diagnostics Summary</h2><div><span>Sample / record</span><strong id="paper-sample">Synthetic teaching sample</strong><span>Analyst</span><strong id="paper-analyst">Muhammad Sohail</strong></div></section>
+            <section class="executive-summary"><span class="paper-kicker">Interpretive summary</span><p id="paper-summary">—</p><div id="paper-lte-status" class="paper-status">—</div></section>
+            <section class="paper-results"><span class="paper-kicker">Key diagnostic results</span><div class="paper-result-grid"><div><span>Excitation temperature</span><strong id="paper-temperature">—</strong><small id="paper-temperature-method">—</small></div><div><span>Electron density</span><strong id="paper-density">—</strong><small id="paper-density-method">—</small></div><div><span>McWhirter minimum</span><strong id="paper-required">—</strong><small id="paper-margin">—</small></div></div></section>
+            <section class="paper-methods"><div><span class="paper-kicker">Transparent calculation</span><h3>Equations and interpretation</h3><p id="paper-method-text">—</p></div><dl><div><dt>Temperature estimate</dt><dd id="paper-temperature-equation">Boltzmann plot slope: T = −1/(k<sub>B</sub>m)</dd></div><div><dt>Density estimate</dt><dd id="paper-density-equation">Stark-width scaling: N<sub>e</sub> = N<sub>ref</sub>(Δλ<sub>Stark</sub>/Δλ<sub>ref</sub>)</dd></div><div><dt>LTE necessary condition</dt><dd id="paper-lte-equation">—</dd></div></dl></section>
+            <section class="paper-validity"><span class="paper-kicker">Validity and quality record</span><h3>Documented checks are kept separate from assumptions.</h3><div id="paper-checks" class="paper-check-grid"></div><p id="paper-validity-reading">—</p></section>
+            <section class="paper-notes"><div><span class="paper-kicker">Experiment / dataset note</span><p id="paper-experiment-note">—</p></div><div><span class="paper-kicker">Traceability note</span><p id="paper-atomic-note">—</p></div></section>
+            <section class="paper-limitations"><span class="paper-kicker">Required caution</span><p>Temperature and electron density are model-dependent estimates. Meeting the McWhirter criterion supports one necessary LTE condition but does not by itself prove local thermodynamic equilibrium, optical thinness, spatial homogeneity, correct line identification or absence of self-absorption.</p></section>
+            <footer class="paper-footer"><span>Generated locally in Muhammad Sohail’s LIBS Plasma Diagnostics Suite</span><span>No data uploaded</span></footer>
+          </article>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="report-guidance section-pad-small"><div class="shell guidance-grid"><div><p class="eyebrow"><span></span> Reporting discipline</p><h2>A report should make uncertainty visible.</h2></div><ol><li><span>01</span><div><strong>Do not combine mismatched measurements</strong><p>Temperature and density should represent compatible plasma regions, delays and detector gates.</p></div></li><li><span>02</span><div><strong>Keep estimates distinct from observations</strong><p>A fitted line width is measured; electron density inferred from it is a model-dependent estimate.</p></div></li><li><span>03</span><div><strong>Record what remains unresolved</strong><p>An unchecked validity item is reported as not documented—not silently assumed to be satisfied.</p></div></li><li><span>04</span><div><strong>Preserve traceability</strong><p>Keep the original spectra, fit settings, atomic references and processing steps with the research record.</p></div></li></ol></div></section>
+  </main>
+  <footer class="site-footer"><div class="shell footer-grid"><div><strong>Muhammad Sohail</strong><span>Research Master's (MPhil) in Physics · Pakistan</span></div><p>Laser spectroscopy · LIBS · Experimental physics</p><span>© <span data-year></span> Muhammad Sohail</span></div></footer>
+  <script src="assets/js/main.js"></script><script src="assets/js/plasma-report.js"></script>
+</body></html>
