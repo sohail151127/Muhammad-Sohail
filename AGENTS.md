@@ -25,6 +25,15 @@
 - Keep completed research claims distinct from future interests and label exploratory analyses conservatively.
 - Do not remove retained source assets merely because they are not currently rendered unless the user explicitly requests deletion.
 
+## Clarity and teaching standard
+
+- Write for an intelligent beginner who may not already know the scientific or technical vocabulary.
+- Define every specialist term at first use, explain why each input matters, and always show units.
+- For calculators and interactive tools, include a guided example, plain-language result interpretations, visible formulas, assumptions, limitations and a glossary.
+- Explain the difference between a calculated estimate, a measured value and a confirmed scientific conclusion.
+- Never leave an unexplained acronym, ambiguous control, hidden requirement or unexplained error state in a public-facing page.
+- Prefer short layered explanations: a simple meaning first, then the formula or technical detail for readers who want it.
+
 ## Git safety
 
 - Do not use destructive history-rewriting commands or force-push `main`.

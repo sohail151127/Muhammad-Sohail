@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A guided laser experiment calculator by Muhammad Sohail for estimating Gaussian focus size, fluence, peak power, irradiance and related beam parameters.">
+  <meta name="theme-color" content="#14243b">
+  <title>Laser Experiment Calculator — Muhammad Sohail</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/laser-calculator.css">
+</head>
+<body class="laser-calculator-page">
+  <a class="skip-link" href="#calculator">Skip to calculator</a>
+
+  <header class="site-header" data-header>
+    <div class="shell header-inner">
+      <a class="brand" href="index.html" aria-label="Muhammad Sohail home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><strong>Muhammad Sohail</strong><small>Physics · Spectroscopy</small></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle><span class="sr-only">Open navigation</span><span></span><span></span><span></span></button>
+      <nav class="nav" id="primary-navigation" aria-label="Primary navigation" data-nav>
+        <a href="index.html#home">Home</a><a href="index.html#research">Research</a><a href="index.html#skills">Skills</a><a href="libs-spectrum-analyzer.html">Spectrum Analyzer</a><a class="is-active" href="laser-experiment-calculator.html" aria-current="page">Laser Calculator</a><a href="cv.html">CV</a><a class="nav-cta" href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="calculator">
+    <section class="laser-hero">
+      <div class="shell laser-hero-grid">
+        <div>
+          <p class="eyebrow"><span></span> Guided physics tool · Gaussian beam estimate</p>
+          <h1>Laser Experiment <em>Calculator.</em></h1>
+          <p class="laser-intro">See how pulse energy, pulse duration and focusing conditions work together. The calculator explains each step so you can understand the physics—not only receive a number.</p>
+          <div class="hero-guide"><strong>Start here:</strong><span>Use the prepared LIBS example, then change one input at a time and watch the results.</span></div>
+        </div>
+        <div class="beam-visual" aria-label="Diagram showing a laser beam passing through a focusing lens and forming a small spot on a sample">
+          <svg viewBox="0 0 520 280" role="img" aria-labelledby="beam-diagram-title beam-diagram-desc">
+            <title id="beam-diagram-title">Simplified laser focusing diagram</title><desc id="beam-diagram-desc">A wide laser beam travels through a lens, narrows to a focused spot, and reaches a sample.</desc>
+            <defs><linearGradient id="beam-gradient" x1="0" x2="1"><stop offset="0" stop-color="#dd6c3e" stop-opacity=".15"/><stop offset=".75" stop-color="#dd6c3e" stop-opacity=".75"/><stop offset="1" stop-color="#f1ac72" stop-opacity=".25"/></linearGradient></defs>
+            <rect x="22" y="96" width="82" height="88" rx="5" class="laser-source"/><text x="63" y="133" text-anchor="middle">PULSED</text><text x="63" y="150" text-anchor="middle">LASER</text>
+            <path d="M104 112 L265 134 L104 168 Z" fill="url(#beam-gradient)"/><path d="M265 134 L430 141 L265 146 Z" fill="url(#beam-gradient)"/>
+            <path d="M263 72 Q229 140 263 208 Q297 140 263 72" class="lens"/><line x1="430" y1="67" x2="430" y2="213" class="sample"/><circle cx="430" cy="140" r="7" class="focus"/><path d="M430 140 l18 -29 l-8 30 l26 -12 l-24 18 l22 13 l-27 -7 l8 28 z" class="plasma"/>
+            <text x="63" y="210">Pulse energy</text><text x="263" y="231" text-anchor="middle">Focusing lens</text><text x="430" y="231" text-anchor="middle">Sample</text><text x="348" y="93" text-anchor="middle">Focused beam</text>
+          </svg>
+          <div class="visual-reading"><span>Current estimated spot</span><strong id="visual-spot">—</strong><small>1/e² diameter at the focus</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept-strip" aria-label="Three core ideas">
+      <div class="shell concept-grid"><article><span>01</span><div><strong>Energy</strong><p>How much laser energy is contained in one pulse.</p></div></article><article><span>02</span><div><strong>Time</strong><p>How quickly that energy is delivered.</p></div></article><article><span>03</span><div><strong>Area</strong><p>How tightly the lens concentrates the beam.</p></div></article></div>
+    </section>
+
+    <section class="calculator-section" aria-labelledby="calculator-heading">
+      <div class="shell">
+        <div class="calculator-heading"><div><p class="eyebrow"><span></span> Interactive calculation</p><h2 id="calculator-heading">Enter the experiment, one idea at a time.</h2></div><div><p>Default values represent a hypothetical LIBS-style example. They are teaching values, not a claim about a particular experiment.</p><button id="restore-example" class="restore-button" type="button">Restore guided example</button></div></div>
+
+        <div class="calculator-layout">
+          <form class="laser-inputs" id="laser-form" novalidate>
+            <div class="input-group-heading"><span>Step 1</span><div><h3>Describe the laser pulse</h3><p>These values tell us how much energy arrives and how quickly it arrives.</p></div></div>
+
+            <label class="guided-field" for="wavelength"><span class="field-title">Wavelength</span><span class="field-control"><input id="wavelength" name="wavelength" type="number" min="100" max="20000" step="1" value="1064" inputmode="decimal"><b>nm</b></span><small>The wavelength is the distance between repeating points of the light wave. Nd:YAG LIBS systems commonly use 1064 nm.</small></label>
+            <label class="guided-field" for="pulse-energy"><span class="field-title">Pulse energy</span><span class="field-control"><input id="pulse-energy" name="pulseEnergy" type="number" min="0.0001" step="0.1" value="50" inputmode="decimal"><b>mJ</b></span><small>Energy carried by one laser pulse. Here, 50 mJ means 0.050 joule in each pulse.</small></label>
+            <label class="guided-field" for="pulse-duration"><span class="field-title">Pulse duration</span><span class="field-control"><input id="pulse-duration" name="pulseDuration" type="number" min="0.0001" step="0.1" value="8" inputmode="decimal"><b>ns</b></span><small>How long one pulse lasts. A nanosecond is one billionth of a second.</small></label>
+            <label class="guided-field" for="repetition-rate"><span class="field-title">Repetition rate</span><span class="field-control"><input id="repetition-rate" name="repetitionRate" type="number" min="0" step="1" value="10" inputmode="decimal"><b>Hz</b></span><small>Number of pulses emitted each second. A value of 10 Hz means ten pulses per second.</small></label>
+
+            <div class="input-group-heading second-group"><span>Step 2</span><div><h3>Describe the focusing setup</h3><p>These values determine how tightly the beam can be focused.</p></div></div>
+            <label class="guided-field" for="beam-diameter"><span class="field-title">Beam diameter at the lens</span><span class="field-control"><input id="beam-diameter" name="beamDiameter" type="number" min="0.001" step="0.1" value="5" inputmode="decimal"><b>mm</b></span><small>The full 1/e² diameter of the collimated beam where it reaches the focusing lens.</small></label>
+            <label class="guided-field" for="focal-length"><span class="field-title">Lens focal length</span><span class="field-control"><input id="focal-length" name="focalLength" type="number" min="0.001" step="1" value="100" inputmode="decimal"><b>mm</b></span><small>The approximate distance from the lens to the focus for a collimated beam. A shorter focal length usually produces a smaller spot.</small></label>
+            <label class="guided-field" for="beam-quality"><span class="field-title">Beam quality factor, M²</span><span class="field-control"><input id="beam-quality" name="beamQuality" type="number" min="1" step="0.1" value="1.5" inputmode="decimal"><b>M²</b></span><small>M² compares a real beam with an ideal Gaussian beam. M² = 1 is ideal; larger values focus to a larger spot.</small></label>
+            <div id="input-message" class="input-message" role="alert" hidden></div>
+          </form>
+
+          <div class="laser-results" aria-live="polite">
+            <div class="results-heading"><span>Calculated estimates</span><h3>What these inputs imply</h3><p>Results update immediately when you change an input.</p></div>
+            <div class="primary-results">
+              <article><span>Focused spot diameter</span><strong id="spot-diameter">—</strong><small>Estimated full 1/e² width at focus</small></article>
+              <article><span>Peak fluence</span><strong id="peak-fluence">—</strong><small>Pulse energy per area at beam centre</small></article>
+              <article><span>Peak power</span><strong id="peak-power">—</strong><small>Pulse energy delivered per pulse duration</small></article>
+              <article><span>Peak irradiance</span><strong id="peak-irradiance">—</strong><small>Peak power per area at beam centre</small></article>
+            </div>
+            <div class="secondary-results">
+              <article><span>Average power</span><strong id="average-power">—</strong><small>Energy per pulse × pulses per second</small></article>
+              <article><span>Rayleigh range</span><strong id="rayleigh-range">—</strong><small>Distance over which the focused radius grows by √2</small></article>
+              <article><span>Half-angle divergence</span><strong id="divergence">—</strong><small>Estimated beam spreading after the waist</small></article>
+              <article><span>F-number</span><strong id="f-number">—</strong><small>Focal length ÷ input beam diameter</small></article>
+            </div>
+            <div class="result-meaning"><span>Plain-language reading</span><p id="result-explanation">—</p></div>
+            <div class="safety-note"><strong>Important:</strong><p>This is an educational first-order estimate. Never use it to set laser-safety limits, optical-damage limits or exposure controls. Use measured beam size, calibrated energy and the guidance of a qualified laser-safety officer.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="calculation-story section-pad-small">
+      <div class="shell story-grid">
+        <div class="story-intro"><p class="eyebrow"><span></span> Follow the calculation</p><h2>The answer is a chain, not a black box.</h2><p>Open each step to see the idea, the equation and the values currently being used.</p></div>
+        <div class="equation-list">
+          <details open><summary><span>01</span><div><strong>Estimate the focused spot</strong><small>Wavelength + focal length + beam width + beam quality</small></div></summary><div><p>A lens bends the incoming beam toward a waist. Longer focal lengths, longer wavelengths and poorer beam quality produce a larger estimated spot; a wider beam at the lens produces a smaller spot.</p><div class="equation">d = 4 M² λ f ÷ (π D)</div><p class="substitution" id="spot-substitution">—</p></div></details>
+          <details><summary><span>02</span><div><strong>Estimate peak power</strong><small>Energy divided by time</small></div></summary><div><p>The same pulse energy produces more peak power when it is delivered in a shorter time. This tool uses the simple rectangular-equivalent estimate.</p><div class="equation">P<sub>peak</sub> ≈ E ÷ τ</div><p class="substitution" id="power-substitution">—</p></div></details>
+          <details><summary><span>03</span><div><strong>Estimate Gaussian peak fluence</strong><small>Pulse energy concentrated into the focused area</small></div></summary><div><p>A Gaussian beam is brightest at its centre. For a 1/e² radius w, its on-axis peak fluence includes a factor of two.</p><div class="equation">F<sub>peak</sub> = 2E ÷ (πw²)</div><p class="substitution" id="fluence-substitution">—</p></div></details>
+          <details><summary><span>04</span><div><strong>Estimate Gaussian peak irradiance</strong><small>Peak power concentrated into the focused area</small></div></summary><div><p>Irradiance describes optical power arriving per unit area. The estimate uses the calculated peak power and Gaussian beam area.</p><div class="equation">I<sub>peak</sub> = 2P<sub>peak</sub> ÷ (πw²)</div><p class="substitution" id="irradiance-substitution">—</p></div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="assumptions-section section-pad-small">
+      <div class="shell assumptions-grid">
+        <div><p class="eyebrow eyebrow-light"><span></span> Read before interpreting</p><h2>What the model assumes.</h2><p>Real laser systems are more complicated. Stating assumptions makes an estimate scientifically honest and helps prevent false precision.</p></div>
+        <ul>
+          <li><strong>Collimated input</strong><span>The beam diameter is treated as nearly constant before the lens.</span></li>
+          <li><strong>Gaussian spatial profile</strong><span>The diameter is the full 1/e² intensity width, not an arbitrary visible edge.</span></li>
+          <li><strong>Ideal thin lens</strong><span>Lens aberrations, clipping and imperfect alignment are not modelled.</span></li>
+          <li><strong>Energy at the sample</strong><span>Losses from mirrors, air and lens transmission are not automatically removed.</span></li>
+          <li><strong>Simple temporal estimate</strong><span>Peak power uses energy divided by pulse duration; the exact temporal pulse shape may change the true peak.</span></li>
+          <li><strong>No plasma feedback</strong><span>Plasma shielding, nonlinear propagation and sample interaction are outside this first-order model.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="glossary-section section-pad-small">
+      <div class="shell">
+        <div class="glossary-heading"><p class="eyebrow"><span></span> Beginner glossary</p><h2>Every symbol, in ordinary language.</h2></div>
+        <dl class="glossary-grid">
+          <div><dt>λ · Wavelength</dt><dd>The spatial period of light. This calculator accepts nanometres (nm).</dd></div>
+          <div><dt>E · Pulse energy</dt><dd>Energy contained in one pulse, entered in millijoules (mJ).</dd></div>
+          <div><dt>τ · Pulse duration</dt><dd>The time length of one pulse, entered in nanoseconds (ns).</dd></div>
+          <div><dt>D · Input diameter</dt><dd>The full 1/e² beam diameter where the collimated beam reaches the lens.</dd></div>
+          <div><dt>f · Focal length</dt><dd>A lens property that controls how strongly the beam is focused.</dd></div>
+          <div><dt>M² · Beam quality</dt><dd>A measure of how closely a real beam behaves like an ideal Gaussian beam.</dd></div>
+          <div><dt>1/e² diameter</dt><dd>A standard Gaussian-beam width. At its radius, the intensity has fallen to about 13.5% of the centre value.</dd></div>
+          <div><dt>w · Focused radius</dt><dd>Half the calculated 1/e² spot diameter at the beam waist.</dd></div>
+          <div><dt>Fluence</dt><dd>Pulse energy delivered per unit area, usually written in J/cm².</dd></div>
+          <div><dt>Irradiance</dt><dd>Optical power delivered per unit area, usually written in W/cm².</dd></div>
+        </dl>
+        <div class="source-note"><div><strong>Equation references</strong><p>The focusing and Gaussian-intensity relationships follow standard Gaussian-beam treatments. The pages below provide deeper derivations and definitions.</p></div><ul><li><a href="https://www.edmundoptics.com/knowledge-center/application-notes/lasers/gaussian-beam-propagation/" target="_blank" rel="noopener noreferrer">Edmund Optics · Gaussian beam propagation ↗</a></li><li><a href="https://www.newport.com/n/gaussian-beam-optics/resources" target="_blank" rel="noopener noreferrer">Newport · Gaussian beam optics ↗</a></li><li><a href="https://www.rp-photonics.com/fluence.html" target="_blank" rel="noopener noreferrer">RP Photonics · Fluence definition ↗</a></li></ul></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="shell footer-grid"><div><strong>Muhammad Sohail</strong><span>Research Master's (MPhil) in Physics · Pakistan</span></div><p>Laser spectroscopy · LIBS · Experimental physics</p><span>© <span data-year></span> Muhammad Sohail</span></div></footer>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/laser-calculator.js"></script>
+</body>
+</html>
