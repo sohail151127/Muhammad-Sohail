@@ -50,7 +50,7 @@ Do not add CNIC, passport, birth date, registration/roll numbers, home address, 
 
 ## Recommended next additions
 
-1. Replace the profile image with a high-resolution professional headshot.
+1. The existing portrait asset is intentionally retained but not currently rendered; it can be reconsidered later.
 2. Confirm the preferred public email and all academic profile links.
 3. Add a polished, current academic CV PDF after review.
 4. Add GitHub repositories for completed scientific-computing projects.
