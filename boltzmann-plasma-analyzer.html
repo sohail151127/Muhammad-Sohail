@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" class="boltzmann-root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A guided Boltzmann plot and plasma excitation-temperature analyzer by Muhammad Sohail for LIBS education and transparent spectral-line regression.">
+  <meta name="theme-color" content="#14243b">
+  <title>Boltzmann Plot & Plasma Temperature Analyzer — Muhammad Sohail</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/boltzmann-analyzer.css">
+</head>
+<body class="boltzmann-page">
+  <a class="skip-link" href="#boltzmann-tool">Skip to analyzer</a>
+  <header class="site-header" data-header>
+    <div class="shell header-inner">
+      <a class="brand" href="index.html" aria-label="Muhammad Sohail home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><strong>Muhammad Sohail</strong><small>Physics · Spectroscopy</small></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle><span class="sr-only">Open navigation</span><span></span><span></span><span></span></button>
+      <nav class="nav" id="primary-navigation" aria-label="Primary navigation" data-nav><a href="index.html#home">Home</a><a href="index.html#research">Research</a><a href="index.html#skills">Skills</a><a href="libs-spectrum-analyzer.html">Spectrum</a><a href="laser-experiment-calculator.html">Laser</a><a class="is-active" href="boltzmann-plasma-analyzer.html" aria-current="page">Plasma</a><a href="cv.html">CV</a><a class="nav-cta" href="index.html#contact">Contact</a></nav>
+    </div>
+  </header>
+
+  <main id="boltzmann-tool">
+    <section class="boltzmann-hero">
+      <div class="shell boltzmann-hero-grid">
+        <div>
+          <p class="eyebrow"><span></span> Guided LIBS plasma diagnostic · Linear regression</p>
+          <h1>Boltzmann Plot & <em>Plasma Temperature.</em></h1>
+          <p class="boltzmann-intro">Turn several emission-line measurements into a transparent excitation-temperature estimate. Every column, equation and limitation is explained before the result is interpreted.</p>
+          <div class="start-note"><strong>Begin with the example.</strong><span>The prepared values are synthetic teaching data—not measurements and not claimed elemental identifications.</span></div>
+        </div>
+        <aside class="hero-equation" aria-label="Main Boltzmann plot equation">
+          <span>The straight-line form</span>
+          <div>ln(Iλ ÷ gA) = −E<sub>u</sub> ÷ (k<sub>B</sub>T) + C</div>
+          <dl><div><dt>Horizontal axis</dt><dd>Upper energy, E<sub>u</sub> (eV)</dd></div><div><dt>Vertical axis</dt><dd>ln(Iλ/gA)</dd></div><div><dt>Temperature</dt><dd>T = −1/(k<sub>B</sub> × slope)</dd></div></dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="idea-strip" aria-label="Boltzmann plot in three ideas"><div class="shell idea-grid"><article><span>01</span><div><strong>Measure lines</strong><p>Use integrated intensities from several transitions of the same species and ionization stage.</p></div></article><article><span>02</span><div><strong>Make points</strong><p>Correct each intensity using its wavelength, transition probability and upper-level weight.</p></div></article><article><span>03</span><div><strong>Fit a line</strong><p>The negative slope gives an excitation-temperature estimate when the assumptions are reasonable.</p></div></article></div></section>
+
+    <section class="analysis-workspace" aria-labelledby="workspace-title">
+      <div class="shell">
+        <div class="workspace-intro"><div><p class="eyebrow"><span></span> Interactive workspace</p><h2 id="workspace-title">Build the plot from line data.</h2></div><div><p>Edit any cell. The plot and results update automatically. At least three valid lines are required; more well-chosen lines usually make the fit easier to evaluate.</p><div class="workspace-actions"><button type="button" id="restore-lines">Restore teaching example</button><button type="button" id="add-line">Add another line</button></div></div></div>
+
+        <section class="line-table-card" aria-labelledby="line-table-title">
+          <div class="card-heading"><div><span>Step 1 · Input</span><h3 id="line-table-title">Spectral-line information</h3></div><p>Use integrated line intensity—not simply the height of one detector pixel. Keep intensity units consistent across all rows.</p></div>
+          <label class="species-field" for="species-name"><span>Species and ionization stage</span><input id="species-name" type="text" value="Synthetic species I"><small>Example: Fe I means neutral iron; Fe II means singly ionized iron. Use one species and one stage per standard Boltzmann plot.</small></label>
+          <div class="table-guide" id="table-guide"><button type="button" data-guide="wavelength"><strong>λ</strong><span>Wavelength</span></button><button type="button" data-guide="intensity"><strong>I</strong><span>Integrated intensity</span></button><button type="button" data-guide="transition"><strong>A<sub>ki</sub></strong><span>Transition probability</span></button><button type="button" data-guide="weight"><strong>g<sub>k</sub></strong><span>Upper statistical weight</span></button><button type="button" data-guide="energy"><strong>E<sub>u</sub></strong><span>Upper energy</span></button></div>
+          <div class="guide-explanation" id="guide-explanation" role="status">Select a column explanation above if a symbol is unfamiliar.</div>
+          <div class="line-table-scroll"><table class="line-table"><thead><tr><th>Label</th><th>λ (nm)</th><th>I (arb. units)</th><th>A<sub>ki</sub> (s⁻¹)</th><th>g<sub>k</sub></th><th>E<sub>u</sub> (eV)</th><th><span class="sr-only">Remove row</span></th></tr></thead><tbody id="line-rows"></tbody></table></div>
+          <div class="table-footer"><p id="line-status" role="alert" aria-live="polite">Teaching example loaded.</p><button type="button" id="download-boltzmann">Download analyzed CSV <span aria-hidden="true">↓</span></button></div>
+        </section>
+
+        <div class="result-layout">
+          <section class="plot-card" aria-labelledby="plot-title">
+            <div class="card-heading"><div><span>Step 2 · Plot</span><h3 id="plot-title">Boltzmann plot and fitted line</h3></div><div class="plot-key"><span><i></i>Line data</span><span><i></i>Linear fit</span></div></div>
+            <div class="plot-wrap"><svg id="boltzmann-chart" viewBox="0 0 920 520" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="plot-title plot-description"><desc id="plot-description">Boltzmann plot of transformed line intensity against upper-level energy with a fitted straight line.</desc></svg></div>
+            <p class="plot-caption">The vertical position uses a natural logarithm. Changing every intensity by the same constant factor moves the line up or down but does not change its slope or the estimated temperature.</p>
+          </section>
+
+          <aside class="temperature-panel" aria-label="Plasma temperature results">
+            <div class="result-kicker">Step 3 · Interpret</div>
+            <h3>Excitation temperature</h3>
+            <strong class="temperature-value" id="temperature-k">—</strong>
+            <span class="uncertainty" id="temperature-uncertainty">—</span>
+            <div class="temperature-ev"><span>Equivalent k<sub>B</sub>T</span><strong id="temperature-ev">—</strong></div>
+            <dl class="fit-metrics"><div><dt>Slope</dt><dd id="fit-slope">—</dd></div><div><dt>R²</dt><dd id="fit-r2">—</dd></div><div><dt>Lines used</dt><dd id="fit-lines">—</dd></div><div><dt>Energy span</dt><dd id="energy-span">—</dd></div></dl>
+            <div class="fit-reading" id="fit-reading">Enter at least three valid lines to calculate a result.</div>
+            <div class="integrity-warning"><strong>R² is not a validity certificate.</strong><p>A straight-looking plot does not prove local thermodynamic equilibrium, optical thinness, correct line identification or absence of self-absorption.</p></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="calculation-walkthrough section-pad-small">
+      <div class="shell walkthrough-grid"><div><p class="eyebrow"><span></span> Understand every step</p><h2>How one table becomes a temperature.</h2><p>The tool is deliberately transparent. It shows the transformed values and regression instead of hiding the calculation behind a button.</p></div><ol><li><span>01</span><div><h3>Transform each line</h3><p>For every row, calculate y = ln(Iλ/gA). This corrects the measured intensity for known transition properties.</p></div></li><li><span>02</span><div><h3>Fit y against E<sub>u</sub></h3><p>Ordinary least-squares regression finds the straight line that minimizes the squared vertical residuals.</p></div></li><li><span>03</span><div><h3>Read the negative slope</h3><p>When upper energy is measured in electronvolts, slope = −1/(k<sub>B</sub>T), using k<sub>B</sub> = 8.617333262 × 10⁻⁵ eV/K.</p></div></li><li><span>04</span><div><h3>Examine—not merely report—the fit</h3><p>Review R², energy spread, residuals, line selection and experimental assumptions before treating the estimate as meaningful.</p></div></li></ol></div>
+    </section>
+
+    <section class="validity-section section-pad-small">
+      <div class="shell validity-grid"><div><p class="eyebrow eyebrow-light"><span></span> Scientific conditions</p><h2>When the estimate can mislead.</h2><p>A calculated number can be precise on screen and still be scientifically unreliable. These checks matter as much as the regression.</p></div><ul><li><strong>Same emitting species</strong><span>Use transitions from one element and one ionization stage in a standard Boltzmann plot.</span></li><li><strong>LTE approximation</strong><span>Level populations must be reasonably described by a Boltzmann distribution at one excitation temperature.</span></li><li><strong>Optically thin lines</strong><span>Strong self-absorption can reduce observed intensity and bend or scatter the plot.</span></li><li><strong>Reliable atomic data</strong><span>Incorrect A<sub>ki</sub>, g<sub>k</sub> or E<sub>u</sub> values directly affect each plotted point.</span></li><li><strong>Calibrated response</strong><span>A detector may respond differently at different wavelengths; relative spectral response should be corrected.</span></li><li><strong>Useful energy spread</strong><span>Lines spanning a wider range of upper energies constrain the slope better than tightly clustered energies.</span></li><li><strong>Unblended integrated lines</strong><span>Overlapping peaks and inconsistent integration boundaries can distort intensity values.</span></li></ul></div>
+    </section>
+
+    <section class="boltzmann-glossary section-pad-small">
+      <div class="shell"><div class="glossary-heading"><p class="eyebrow"><span></span> Beginner glossary</p><h2>The vocabulary behind the plot.</h2></div><dl class="glossary-grid"><div><dt>Emission line</dt><dd>Light at a characteristic wavelength released when an excited atom or ion moves to a lower energy level.</dd></div><div><dt>Integrated intensity, I</dt><dd>The area under an emission peak after background correction, in consistent arbitrary or calibrated units.</dd></div><div><dt>Transition probability, A<sub>ki</sub></dt><dd>The probability per second that the upper state k decays radiatively to the lower state i.</dd></div><div><dt>Statistical weight, g<sub>k</sub></dt><dd>The degeneracy of the upper energy level. NIST lists it as g = 2J + 1.</dd></div><div><dt>Upper energy, E<sub>u</sub></dt><dd>The energy of the emitting upper level relative to the ground level, entered here in electronvolts.</dd></div><div><dt>Natural logarithm, ln</dt><dd>A mathematical transformation that turns the exponential Boltzmann relationship into a straight-line equation.</dd></div><div><dt>Residual</dt><dd>The vertical difference between an observed plot point and the value predicted by the fitted line.</dd></div><div><dt>R²</dt><dd>A measure of how much variation is described by the fitted line. Closer to 1 is more linear, but not automatically more valid.</dd></div><div><dt>Excitation temperature</dt><dd>The temperature parameter describing relative excited-level populations under the model assumptions.</dd></div><div><dt>LTE</dt><dd>Local thermodynamic equilibrium: an approximation in which local particle populations can be described by thermodynamic relations.</dd></div></dl>
+        <div class="reference-box"><div><strong>Where the input data and equation come from</strong><p>NIST ASD supplies evaluated wavelengths, upper energies, statistical weights and transition probabilities. The linked research article shows the same straight-line Boltzmann formulation used here.</p></div><ul><li><a href="https://physics.nist.gov/PhysRefData/ASD/lines_form.html" target="_blank" rel="noopener noreferrer">NIST Atomic Spectra Database · Lines form ↗</a></li><li><a href="https://www.physics.nist.gov/PhysRefData/ASD/Html/lineshelp.html" target="_blank" rel="noopener noreferrer">NIST · Explanation of line-table columns ↗</a></li><li><a href="https://www.mdpi.com/2218-2004/8/3/50" target="_blank" rel="noopener noreferrer">Atoms · LIBS plasma temperature study ↗</a></li></ul></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="shell footer-grid"><div><strong>Muhammad Sohail</strong><span>Research Master's (MPhil) in Physics · Pakistan</span></div><p>Laser spectroscopy · LIBS · Experimental physics</p><span>© <span data-year></span> Muhammad Sohail</span></div></footer>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/boltzmann-analyzer.js"></script>
+</body>
+</html>

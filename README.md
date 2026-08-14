@@ -8,6 +8,7 @@ A dependency-free static academic website designed for funded MS, MS-to-PhD, PhD
 - `research.html` — detailed LIBS/AAS/CF-LIBS/PCA case study
 - `libs-spectrum-analyzer.html` — interactive browser-based spectrum analysis project
 - `laser-experiment-calculator.html` — guided Gaussian-beam and pulsed-laser calculator
+- `boltzmann-plasma-analyzer.html` — guided Boltzmann plot and plasma excitation-temperature analyzer
 - `cv.html` — privacy-safe academic CV with Print / Save as PDF
 - `404.html` — custom fallback page
 
@@ -47,6 +48,8 @@ The repository root is deployed through GitHub Pages; no build command is requir
 - Analyzer styling: edit `assets/css/spectrum-analyzer.css`.
 - Laser calculator logic: edit `assets/js/laser-calculator.js`.
 - Laser calculator styling: edit `assets/css/laser-calculator.css`.
+- Boltzmann analyzer logic: edit `assets/js/boltzmann-analyzer.js`.
+- Boltzmann analyzer styling: edit `assets/css/boltzmann-analyzer.css`.
 - Academic record: edit `cv.html`.
 - Shared colors, spacing and typography: edit `assets/css/styles.css`.
 - Shared interactions: edit `assets/js/main.js`.

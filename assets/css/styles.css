@@ -179,7 +179,7 @@ em { font-family: var(--serif); font-weight: 400; }
 .toolkit-grid h3 { margin: 28px 0 12px; font-family: var(--serif); font-size: 1.38rem; font-weight: 400; }
 .toolkit-grid p { margin-bottom: 20px; font-size: .8rem; }
 .toolkit-grid small { margin-top: auto; color: #727b87; font-size: .66rem; line-height: 1.5; }
-.project-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+.project-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
 .project-card { min-height: 360px; display: flex; flex-direction: column; padding: 32px; border: 1px solid var(--line); background: white; transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
 .project-card:hover { transform: translateY(-6px); border-color: #bec8ce; box-shadow: 0 20px 55px rgba(20,36,59,.1); }
 .project-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; color: #8b919a; font-size: .63rem; text-transform: uppercase; letter-spacing: .1em; }
